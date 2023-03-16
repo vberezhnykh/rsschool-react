@@ -5,6 +5,7 @@ import About from './pages/aboutPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './pages/mainPage';
 import ErrorPage from './pages/errorPage';
+import Form from './pages/formPage';
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     element: <Main />,
     errorElement: <ErrorPage />,
   },
+  { path: '/form', element: <Form /> },
   {
     path: '/about',
     element: <About />,
@@ -20,6 +22,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />;
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
