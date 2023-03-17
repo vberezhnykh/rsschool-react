@@ -69,50 +69,73 @@ class Form extends React.Component<Record<string, unknown>, FormState> {
       <>
         <Header page="Form Page"></Header>
         <main className="main">
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Name: <input type="text" ref={this.nameInput} defaultValue="Valentin" />
-            </label>
-            <label>
-              Surname: <input type="text" ref={this.surnameInput} defaultValue="Berezhnykh" />
-            </label>
-            <label>
-              Date of Birth: <input type="date" ref={this.dateInput} defaultValue="1996-09-01" />
-            </label>
-            <label>
-              Residence:
-              <select ref={this.residenceInput} defaultValue="Russia">
-                <option value="Russia">Russia</option>
-                <option value="Ukraine">Ukraine</option>
-                <option value="Belarus">Belarus</option>
-                <option value="Other">Other</option>
-              </select>
-            </label>
-            <label>
-              I consent to my personal data:
+          <form onSubmit={this.handleSubmit} className="form">
+            <div className="fullname-container">
               <label>
-                Name:
-                <input type="checkbox" ref={this.nameConsentInput} />
+                Name:{' '}
+                <input
+                  type="text"
+                  ref={this.nameInput}
+                  className="form__name-input"
+                  placeholder="Enter your name..."
+                />
               </label>
               <label>
-                Surname:
-                <input type="checkbox" ref={this.surnameConsentInput} />
+                Surname:{' '}
+                <input
+                  type="text"
+                  ref={this.surnameInput}
+                  className="form__surname-input"
+                  placeholder="Enter your surname..."
+                />
+              </label>
+            </div>
+            <div className="date-and-residence-container">
+              <label>
+                Date of Birth:{' '}
+                <input type="date" ref={this.dateInput} className="form__date-input" />
               </label>
               <label>
-                Date of Birth:
-                <input type="checkbox" ref={this.dateOfBirthConsentInput} />
+                Residence:{' '}
+                <select
+                  ref={this.residenceInput}
+                  defaultValue="Russia"
+                  className="form__residence-input"
+                >
+                  <option value="Russia">Russia</option>
+                  <option value="Ukraine">Ukraine</option>
+                  <option value="Belarus">Belarus</option>
+                  <option value="Other">Other</option>
+                </select>
               </label>
-              <label>
-                Residence:
-                <input type="checkbox" ref={this.residenceConsentInput} />
-              </label>
-              <label className="switcher">
-                Sex:
-                <input type="checkbox" ref={this.sexInput} />
-                <span className="slider"></span>
-              </label>
+            </div>
+            <label>
+              <span className="consent-heading">I consent to my personal data:</span>
+              <div className="consent-container">
+                <label className="consent-checkbox">
+                  Name:
+                  <input type="checkbox" ref={this.nameConsentInput} />
+                </label>
+                <label className="consent-checkbox">
+                  Surname: <input type="checkbox" ref={this.surnameConsentInput} />
+                </label>
+                <label className="consent-checkbox">
+                  Date of Birth: <input type="checkbox" ref={this.dateOfBirthConsentInput} />
+                </label>
+                <label className="consent-checkbox">
+                  Residence: <input type="checkbox" ref={this.residenceConsentInput} />
+                </label>
+                <div className="sex-container">
+                  <span>Male</span>
+                  <label className="switcher">
+                    <input type="checkbox" ref={this.sexInput} />
+                    <span className="slider"></span>
+                  </label>
+                  <span>Female</span>
+                </div>
+              </div>
             </label>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" className="form__submit-btn" />
           </form>
           <div>Cards:</div>
           <FormCards cards={this.state.cards} />
