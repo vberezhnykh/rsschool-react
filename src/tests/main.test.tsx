@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
-import Main from '../pages/mainPage';
-import About from '../pages/aboutPage';
+import MainPage from '../pages/mainPage';
+import AboutPage from '../pages/aboutPage';
 import ErrorPage from '../pages/errorPage';
 
 describe('App', () => {
@@ -11,8 +11,8 @@ describe('App', () => {
     render(
       <MemoryRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </MemoryRouter>
@@ -38,8 +38,8 @@ describe('App', () => {
     render(
       <MemoryRouter initialEntries={[badRoute]}>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </MemoryRouter>

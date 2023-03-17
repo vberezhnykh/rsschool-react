@@ -18,11 +18,9 @@ export type CardsProps = {
   value: string;
 };
 
-export type SearchInputEventHandler = (event: React.ChangeEvent<HTMLInputElement>) => void;
-
 export type SearchInputProps = {
   value: string;
-  onChange: SearchInputEventHandler;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export type MainState = {
@@ -47,4 +45,22 @@ export type CardData = {
 
 export type FormState = {
   cards: CardData[];
+};
+
+type FormRefs = {
+  nameInput: React.RefObject<HTMLInputElement>;
+  surnameInput: React.RefObject<HTMLInputElement>;
+  dateInput: React.RefObject<HTMLInputElement>;
+  residenceInput: React.RefObject<HTMLSelectElement>;
+  nameConsentInput: React.RefObject<HTMLInputElement>;
+  surnameConsentInput: React.RefObject<HTMLInputElement>;
+  dateOfBirthConsentInput: React.RefObject<HTMLInputElement>;
+  residenceConsentInput: React.RefObject<HTMLInputElement>;
+  sexInput: React.RefObject<HTMLInputElement>;
+};
+
+export type FormProps = {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  state: FormState;
+  refs: FormRefs;
 };

@@ -1,22 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.scss';
-import About from './pages/aboutPage';
+import AboutPage from './pages/aboutPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Main from './pages/mainPage';
+import MainPage from './pages/mainPage';
 import ErrorPage from './pages/errorPage';
-import Form from './pages/formPage';
+import FormPage from './pages/formPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Main />,
+    element: <MainPage />,
     errorElement: <ErrorPage />,
   },
-  { path: '/form', element: <Form /> },
+  { path: '/form', element: <FormPage /> },
   {
     path: '/about',
-    element: <About />,
+    element: <AboutPage />,
   },
 ]);
 
