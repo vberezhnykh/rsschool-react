@@ -1,8 +1,9 @@
 import React from 'react';
-import { FormState } from '../types';
+import { FormCardsProps } from '../types';
+import closeImgSrc from '../assets/close.svg';
 
-class FormCards extends React.Component<FormState> {
-  constructor(props: FormState) {
+class FormCards extends React.Component<FormCardsProps> {
+  constructor(props: FormCardsProps) {
     super(props);
   }
 
@@ -16,32 +17,40 @@ class FormCards extends React.Component<FormState> {
     }
     const listItems = this.props.cards.map((card, index) => (
       <li key={`form-card-${index}`} className="form-cards__item">
-        <div className="card-info-container">
-          <p className="form-cards__name">
-            <span>Name:</span> {card.name}
-          </p>
-          <p>
-            <span>Surname:</span> {card.surname}
-          </p>
-          <p>
-            <span>Date of Birth:</span> {card.dateOfBirth}
-          </p>
-          <p>
-            <span>Residence:</span> {card.residence}
-          </p>
-          <p>
-            <span>Sex:</span> {card.sex}
-          </p>
-          <ul className="consent-list">
-            <span>Consent:</span>
+        <img
+          src={closeImgSrc}
+          alt="Cross"
+          className="form-cards__close-img"
+          onClick={() => this.props.clickHandler(this.props.cards[index])}
+        />
+        <div className="card-info-image-container">
+          <div className="card-info-container">
+            <p className="form-cards__name">
+              <span>Name:</span> {card.name}
+            </p>
+            <p>
+              <span>Surname:</span> {card.surname}
+            </p>
+            <p>
+              <span>Date of Birth:</span> {card.dateOfBirth}
+            </p>
+            <p>
+              <span>Residence:</span> {card.residence}
+            </p>
+            <p>
+              <span>Sex:</span> {card.sex}
+            </p>
+            <ul className="consent-list">
+              <span>Consent:</span>
 
-            <li>Name: {card.nameConsent ? '✓' : '✗'}</li>
-            <li>Surname: {card.surnameConsent ? '✓' : '✗'}</li>
-            <li>Date of Birth: {card.dateOfBirthConsent ? '✓' : '✗'}</li>
-            <li>Residence: {card.residenceConsent ? '✓' : '✗'}</li>
-          </ul>
+              <li>Name: {card.nameConsent ? '✓' : '✗'}</li>
+              <li>Surname: {card.surnameConsent ? '✓' : '✗'}</li>
+              <li>Date of Birth: {card.dateOfBirthConsent ? '✓' : '✗'}</li>
+              <li>Residence: {card.residenceConsent ? '✓' : '✗'}</li>
+            </ul>
+          </div>
+          <img src="" alt="" className="form-cards__image" />
         </div>
-        <img src="" alt="" className="form-cards__image" />
       </li>
     ));
     return <ul className="form-cards">{listItems}</ul>;

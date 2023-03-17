@@ -2,7 +2,7 @@ import React from 'react';
 import Form from '../components/form';
 import FormCards from '../components/formCards';
 import Header from '../components/header';
-import { FormState } from '../types';
+import { CardData, FormState } from '../types';
 
 class FormPage extends React.Component<Record<string, unknown>, FormState> {
   nameInput: React.RefObject<HTMLInputElement>;
@@ -14,6 +14,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
   dateOfBirthConsentInput: React.RefObject<HTMLInputElement>;
   residenceConsentInput: React.RefObject<HTMLInputElement>;
   sexInput: React.RefObject<HTMLInputElement>;
+
   constructor(props: Record<string, unknown>) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +31,26 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     this.state = {
       cards: cardsInLocalStorage ? JSON.parse(cardsInLocalStorage) : [],
     };
+    this.handleCardClose = this.handleCardClose.bind(this);
+    this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
+  }
+
+  saveStateToLocalStorage() {
+    localStorage.setItem('cards', JSON.stringify(this.state.cards));
+  }
+
+  componentDidMount(): void {
+    window.addEventListener('beforeunload', this.saveStateToLocalStorage);
+  }
+
+  componentWillUnmount(): void {
+    window.removeEventListener('beforeunload', this.saveStateToLocalStorage);
+  }
+
+  handleCardClose(card: CardData): void {
+    this.setState({
+      cards: this.state.cards.filter((cardElement) => cardElement !== card),
+    });
   }
 
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -86,7 +107,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
               sexInput: this.sexInput,
             }}
           />
-          <FormCards cards={this.state.cards} />
+          <FormCards cards={this.state.cards} clickHandler={this.handleCardClose} />
         </main>
       </>
     );

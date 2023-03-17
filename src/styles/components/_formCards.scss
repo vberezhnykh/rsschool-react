@@ -16,7 +16,25 @@
   border: 0.2rem solid $blue;
   border-radius: calc(1rem + 1.5rem);
   display: flex;
+  flex-direction: column;
   font-size: 1.4rem;
+}
+
+.form-cards__close-img {
+  display: block;
+  width: 3.2rem;
+  height: 3.2rem;
+  align-self: flex-end;
+  cursor: pointer;
+  margin-bottom: 1rem;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.card-info-image-container {
+  display: flex;
 }
 
 .card-info-container {

@@ -47,6 +47,11 @@ export type FormState = {
   cards: CardData[];
 };
 
+export type FormCardsProps = {
+  cards: CardData[];
+  clickHandler: (card: CardData) => void;
+};
+
 type FormRefs = {
   nameInput: React.RefObject<HTMLInputElement>;
   surnameInput: React.RefObject<HTMLInputElement>;
