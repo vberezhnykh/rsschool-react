@@ -1,39 +1,104 @@
 import React from 'react';
 import { FormProps } from '../types';
 
-class Form extends React.Component<FormProps> {
+type FormState = {
+  nameValid: boolean;
+  surnameValid: boolean;
+  dateOfBirthValid: boolean;
+  formValid: boolean;
+};
+
+class Form extends React.Component<FormProps, FormState> {
   constructor(props: FormProps) {
     super(props);
+    this.state = {
+      nameValid: false,
+      surnameValid: false,
+      dateOfBirthValid: false,
+      formValid: false,
+    };
+    this.checkFormValidation = this.checkFormValidation.bind(this);
+    this.checkFullNameValidation = this.checkFullNameValidation.bind(this);
+    this.checkDateOfBirthValidation = this.checkDateOfBirthValidation.bind(this);
+  }
+
+  checkFormValidation() {
+    this.setState((prevState) => {
+      return prevState.nameValid && prevState.surnameValid && prevState.dateOfBirthValid
+        ? { formValid: true }
+        : { formValid: false };
+    });
+  }
+
+  checkFullNameValidation(e: React.ChangeEvent<HTMLInputElement>) {
+    const regex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
+    if (e.currentTarget.name === 'name-input') {
+      this.setState({
+        nameValid: regex.test(e.currentTarget.value),
+      });
+    } else if (e.currentTarget.name === 'surname-input') {
+      this.setState({
+        surnameValid: regex.test(e.currentTarget.value),
+      });
+    }
+  }
+
+  checkDateOfBirthValidation(e: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({
+      dateOfBirthValid: e.currentTarget.value !== '' ? true : false,
+    });
   }
 
   render(): React.ReactNode {
     return (
       <>
-        <form onSubmit={this.props.onSubmit} className="form">
+        <form
+          onSubmit={(e) => {
+            this.props.onSubmit(e);
+            this.setState({
+              nameValid: false,
+              surnameValid: false,
+              dateOfBirthValid: false,
+              formValid: false,
+            });
+          }}
+          className="form"
+          onChange={this.checkFormValidation}
+        >
           <div className="fullname-container">
             <label>
               Name:{' '}
               <input
+                name="name-input"
                 type="text"
                 ref={this.props.refs.nameInput}
                 className="form__name-input"
                 placeholder="Enter your name..."
+                onChange={(e) => this.checkFullNameValidation(e)}
               />
             </label>
             <label>
               Surname:{' '}
               <input
+                name="surname-input"
                 type="text"
                 ref={this.props.refs.surnameInput}
                 className="form__surname-input"
                 placeholder="Enter your surname..."
+                onChange={(e) => this.checkFullNameValidation(e)}
               />
             </label>
           </div>
           <div className="date-and-residence-container">
             <label>
               Date of Birth:{' '}
-              <input type="date" ref={this.props.refs.dateInput} className="form__date-input" />
+              <input
+                name="date-of-birth-input"
+                type="date"
+                ref={this.props.refs.dateInput}
+                className="form__date-input"
+                onChange={(e) => this.checkDateOfBirthValidation(e)}
+              />
             </label>
             <label>
               Residence:{' '}
@@ -76,7 +141,12 @@ class Form extends React.Component<FormProps> {
               </div>
             </div>
           </label>
-          <input type="submit" value="Submit" className="form__submit-btn" />
+          <input
+            type="submit"
+            value="Submit"
+            className="form__submit-btn"
+            disabled={!this.state.formValid}
+          />
         </form>
       </>
     );

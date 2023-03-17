@@ -85,6 +85,9 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
         ],
       };
     });
+    if (this.nameInput.current) this.nameInput.current.value = '';
+    if (this.surnameInput.current) this.surnameInput.current.value = '';
+    if (this.dateInput.current) this.dateInput.current.value = '';
   }
 
   render(): React.ReactNode {
