@@ -32,3 +32,19 @@ export type MainState = {
 export type HeaderProps = {
   page: string;
 };
+
+export type CardData = {
+  name: string;
+  surname: string;
+  dateOfBirth: string;
+  residence: string;
+  nameConsent: boolean;
+  surnameConsent: boolean;
+  dateOfBirthConsent: boolean;
+  residenceConsent: boolean;
+  sex: string;
+};
+
+export type FormState = {
+  cards: CardData[];
+};
