@@ -6,6 +6,10 @@ class FormCards extends React.Component<FormState> {
     super(props);
   }
 
+  componentWillUnmount(): void {
+    localStorage.setItem('cards', JSON.stringify(this.props.cards));
+  }
+
   render(): React.ReactNode {
     if (this.props.cards.length === 0) {
       return <div className="form-cards--not-found">Nothing has been sumbitted yet.</div>;

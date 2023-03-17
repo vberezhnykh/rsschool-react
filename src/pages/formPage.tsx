@@ -26,8 +26,9 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     this.dateOfBirthConsentInput = React.createRef();
     this.residenceConsentInput = React.createRef();
     this.sexInput = React.createRef();
+    const cardsInLocalStorage = localStorage.getItem('cards');
     this.state = {
-      cards: [],
+      cards: cardsInLocalStorage ? JSON.parse(cardsInLocalStorage) : [],
     };
   }
 
