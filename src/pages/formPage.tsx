@@ -33,6 +33,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     };
     this.handleCardClose = this.handleCardClose.bind(this);
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
+    this.resetInput = this.resetInput.bind(this);
   }
 
   saveStateToLocalStorage() {
@@ -51,6 +52,18 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     this.setState({
       cards: this.state.cards.filter((cardElement) => cardElement !== card),
     });
+  }
+
+  resetInput() {
+    if (this.nameInput.current) this.nameInput.current.value = '';
+    if (this.surnameInput.current) this.surnameInput.current.value = '';
+    if (this.dateInput.current) this.dateInput.current.value = '';
+    if (this.residenceInput.current) this.residenceInput.current.value = 'Russia';
+    if (this.nameConsentInput.current) this.nameConsentInput.current.checked = false;
+    if (this.surnameConsentInput.current) this.surnameConsentInput.current.checked = false;
+    if (this.dateOfBirthConsentInput.current) this.dateOfBirthConsentInput.current.checked = false;
+    if (this.residenceConsentInput.current) this.residenceConsentInput.current.checked = false;
+    if (this.sexInput.current) this.sexInput.current.checked = false;
   }
 
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -85,9 +98,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
         ],
       };
     });
-    if (this.nameInput.current) this.nameInput.current.value = '';
-    if (this.surnameInput.current) this.surnameInput.current.value = '';
-    if (this.dateInput.current) this.dateInput.current.value = '';
+    setTimeout(this.resetInput, 0);
   }
 
   render(): React.ReactNode {
@@ -96,7 +107,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
         <Header page="Form Page"></Header>
         <main className="main">
           <Form
-            onSubmit={this.handleSubmit}
+            submitHandler={this.handleSubmit}
             state={this.state}
             refs={{
               nameInput: this.nameInput,

@@ -65,7 +65,7 @@ type FormRefs = {
 };
 
 export type FormProps = {
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  submitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
   state: FormState;
   refs: FormRefs;
 };

@@ -54,7 +54,7 @@ class Form extends React.Component<FormProps, FormState> {
       <>
         <form
           onSubmit={(e) => {
-            this.props.onSubmit(e);
+            this.props.submitHandler(e);
             this.setState({
               nameValid: false,
               surnameValid: false,
