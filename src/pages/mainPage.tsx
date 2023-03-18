@@ -1,6 +1,6 @@
 import Cards from '../components/cards';
 import Header from '../components/header';
-import SearchInput from '../components/input';
+import SearchInput from '../components/searchInput';
 import React from 'react';
 import { MainState } from '../types';
 

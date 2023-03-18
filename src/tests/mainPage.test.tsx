@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Header from '../components/header';
 import { BrowserRouter } from 'react-router-dom';
-import SearchInput from '../components/input';
+import SearchInput from '../components/searchInput';
 
 describe('Main Page', () => {
   it('renders Header component', () => {
