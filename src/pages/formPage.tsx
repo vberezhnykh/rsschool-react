@@ -9,6 +9,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
   surnameInput: React.RefObject<HTMLInputElement>;
   dateInput: React.RefObject<HTMLInputElement>;
   residenceInput: React.RefObject<HTMLSelectElement>;
+  fileInput: React.RefObject<HTMLInputElement>;
   nameConsentInput: React.RefObject<HTMLInputElement>;
   surnameConsentInput: React.RefObject<HTMLInputElement>;
   dateOfBirthConsentInput: React.RefObject<HTMLInputElement>;
@@ -22,6 +23,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     this.surnameInput = React.createRef();
     this.dateInput = React.createRef();
     this.residenceInput = React.createRef();
+    this.fileInput = React.createRef();
     this.nameConsentInput = React.createRef();
     this.surnameConsentInput = React.createRef();
     this.dateOfBirthConsentInput = React.createRef();
@@ -34,6 +36,8 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     this.handleCardClose = this.handleCardClose.bind(this);
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
     this.resetInput = this.resetInput.bind(this);
+    this.handleFileInput = this.handleFileInput.bind(this);
+    this.readFileAsync = this.readFileAsync.bind(this);
   }
 
   saveStateToLocalStorage() {
@@ -59,6 +63,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     if (this.surnameInput.current) this.surnameInput.current.value = '';
     if (this.dateInput.current) this.dateInput.current.value = '';
     if (this.residenceInput.current) this.residenceInput.current.value = 'Russia';
+    if (this.fileInput.current) this.fileInput.current.value = '';
     if (this.nameConsentInput.current) this.nameConsentInput.current.checked = false;
     if (this.surnameConsentInput.current) this.surnameConsentInput.current.checked = false;
     if (this.dateOfBirthConsentInput.current) this.dateOfBirthConsentInput.current.checked = false;
@@ -66,14 +71,33 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     if (this.sexInput.current) this.sexInput.current.checked = false;
   }
 
-  handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  readFileAsync(file: File) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async handleFileInput() {
+    if (!this.fileInput.current?.files) return '';
+    const uploadedFile = this.fileInput.current.files[0];
+    const res = await this.readFileAsync(uploadedFile);
+    const src = typeof res === 'string' ? res : '';
+    return src;
+  }
+
+  async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const imageSrc = await this.handleFileInput();
     this.setState((prevState) => {
       if (
         !this.nameInput.current ||
         !this.surnameInput.current ||
         !this.dateInput.current ||
         !this.residenceInput.current ||
+        !this.fileInput.current ||
         !this.nameConsentInput.current ||
         !this.surnameConsentInput.current ||
         !this.dateOfBirthConsentInput.current ||
@@ -89,6 +113,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
             surname: this.surnameInput.current.value,
             dateOfBirth: this.dateInput.current.value,
             residence: this.residenceInput.current.value,
+            file: imageSrc,
             nameConsent: this.nameConsentInput.current.checked,
             surnameConsent: this.surnameConsentInput.current.checked,
             dateOfBirthConsent: this.dateOfBirthConsentInput.current.checked,
@@ -114,6 +139,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
               surnameInput: this.surnameInput,
               dateInput: this.dateInput,
               residenceInput: this.residenceInput,
+              fileInput: this.fileInput,
               nameConsentInput: this.nameConsentInput,
               surnameConsentInput: this.surnameConsentInput,
               dateOfBirthConsentInput: this.dateOfBirthConsentInput,

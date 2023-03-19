@@ -49,7 +49,7 @@ class FormCards extends React.Component<FormCardsProps> {
               <li>Residence: {card.residenceConsent ? '✓' : '✗'}</li>
             </ul>
           </div>
-          <img src="" alt="" className="form-cards__image" />
+          <img src={card.file} alt="" className="form-cards__image" />
         </div>
       </li>
     ));

@@ -19,6 +19,32 @@
   }
 }
 
+.form__file-input {
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+  &::before {
+    content: 'Select profile photo';
+    display: inline-block;
+    border: 0.1rem solid $blue;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-size: 2rem;
+  }
+
+  &:active::before {
+    background-color: $light-blue;
+  }
+}
+
+  
+
+
 .fullname-container, .date-and-residence-container {
   display: flex;
   align-items: center;

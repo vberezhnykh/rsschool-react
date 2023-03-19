@@ -36,6 +36,7 @@ export type CardData = {
   surname: string;
   dateOfBirth: string;
   residence: string;
+  file: string;
   nameConsent: boolean;
   surnameConsent: boolean;
   dateOfBirthConsent: boolean;
@@ -57,6 +58,7 @@ type FormRefs = {
   surnameInput: React.RefObject<HTMLInputElement>;
   dateInput: React.RefObject<HTMLInputElement>;
   residenceInput: React.RefObject<HTMLSelectElement>;
+  fileInput: React.RefObject<HTMLInputElement>;
   nameConsentInput: React.RefObject<HTMLInputElement>;
   surnameConsentInput: React.RefObject<HTMLInputElement>;
   dateOfBirthConsentInput: React.RefObject<HTMLInputElement>;

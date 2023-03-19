@@ -20,6 +20,7 @@ class Form extends React.Component<FormProps, FormState> {
     this.checkFormValidation = this.checkFormValidation.bind(this);
     this.checkFullNameValidation = this.checkFullNameValidation.bind(this);
     this.checkDateOfBirthValidation = this.checkDateOfBirthValidation.bind(this);
+    this.fileInputHandler = this.fileInputHandler.bind(this);
   }
 
   checkFormValidation() {
@@ -49,6 +50,19 @@ class Form extends React.Component<FormProps, FormState> {
     });
   }
 
+  fileInputHandler() {
+    // if (e.target.value === '') e.target.classList.add('form__file-input')
+    /* if (!e.target.files) return;
+    const uploadedFile = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(uploadedFile);
+    reader.onload = () => {
+      const src = reader.result;
+      console.log(src);
+    }; */
+    // console.log(uploadedFile);
+  }
+
   render(): React.ReactNode {
     return (
       <>
@@ -74,7 +88,7 @@ class Form extends React.Component<FormProps, FormState> {
                 ref={this.props.refs.nameInput}
                 className="form__name-input"
                 placeholder="Enter your name..."
-                onChange={(e) => this.checkFullNameValidation(e)}
+                onChange={this.checkFullNameValidation}
               />
             </label>
             <label>
@@ -85,7 +99,7 @@ class Form extends React.Component<FormProps, FormState> {
                 ref={this.props.refs.surnameInput}
                 className="form__surname-input"
                 placeholder="Enter your surname..."
-                onChange={(e) => this.checkFullNameValidation(e)}
+                onChange={this.checkFullNameValidation}
               />
             </label>
           </div>
@@ -97,7 +111,7 @@ class Form extends React.Component<FormProps, FormState> {
                 type="date"
                 ref={this.props.refs.dateInput}
                 className="form__date-input"
-                onChange={(e) => this.checkDateOfBirthValidation(e)}
+                onChange={this.checkDateOfBirthValidation}
               />
             </label>
             <label>
@@ -112,6 +126,16 @@ class Form extends React.Component<FormProps, FormState> {
                 <option value="Belarus">Belarus</option>
                 <option value="Other">Other</option>
               </select>
+            </label>
+            <label>
+              <input
+                type="file"
+                name="file-input"
+                accept="image/*"
+                className="form__file-input"
+                onChange={this.fileInputHandler}
+                ref={this.props.refs.fileInput}
+              />
             </label>
           </div>
           <label>
