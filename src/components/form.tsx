@@ -6,6 +6,7 @@ type FormState = {
   surnameValid: boolean;
   dateOfBirthValid: boolean;
   formValid: boolean;
+  errorsFields: string[];
 };
 
 class Form extends React.Component<FormProps, FormState> {
@@ -16,11 +17,11 @@ class Form extends React.Component<FormProps, FormState> {
       surnameValid: false,
       dateOfBirthValid: false,
       formValid: true,
+      errorsFields: [],
     };
     this.checkFormValidation = this.checkFormValidation.bind(this);
     this.checkFullNameValidation = this.checkFullNameValidation.bind(this);
     this.checkDateOfBirthValidation = this.checkDateOfBirthValidation.bind(this);
-    this.fileInputHandler = this.fileInputHandler.bind(this);
   }
 
   async checkFormValidation() {
@@ -52,19 +53,6 @@ class Form extends React.Component<FormProps, FormState> {
     this.checkFormValidation();
   }
 
-  fileInputHandler() {
-    // if (e.target.value === '') e.target.classList.add('form__file-input')
-    /* if (!e.target.files) return;
-    const uploadedFile = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(uploadedFile);
-    reader.onload = () => {
-      const src = reader.result;
-      console.log(src);
-    }; */
-    // console.log(uploadedFile);
-  }
-
   render(): React.ReactNode {
     return (
       <>
@@ -79,8 +67,16 @@ class Form extends React.Component<FormProps, FormState> {
                 surnameValid: false,
                 dateOfBirthValid: false,
                 formValid: true,
+                errorsFields: [],
               });
-            } else alert('form not valid');
+            } else {
+              alert('form not valid');
+              this.setState((prevState) => {
+                const keys = Object.keys(prevState) as Array<keyof typeof prevState>;
+                const filtered = keys.filter((key) => !prevState[key] && key !== 'formValid');
+                return { errorsFields: [...filtered] };
+              });
+            }
           }}
           className="form"
         >
@@ -107,6 +103,30 @@ class Form extends React.Component<FormProps, FormState> {
                 onChange={this.checkFullNameValidation}
               />
             </label>
+          </div>
+          <div
+            className={`fullname-errors-container ${(() =>
+              this.state.errorsFields.includes('nameValid') ||
+              this.state.errorsFields.includes('surnameValid')
+                ? 'fullname-errors-container--visible'
+                : undefined)()}`}
+          >
+            <div
+              className={`name-error ${(() =>
+                this.state.errorsFields.includes('nameValid')
+                  ? 'name-error--visible'
+                  : undefined)()}`}
+            >
+              Name is invalid
+            </div>
+            <div
+              className={`surname-error ${(() =>
+                this.state.errorsFields.includes('surnameValid')
+                  ? 'surname-error--visible'
+                  : undefined)()}`}
+            >
+              Surname is invalid
+            </div>
           </div>
           <div className="date-and-residence-container">
             <label>
@@ -138,7 +158,6 @@ class Form extends React.Component<FormProps, FormState> {
                 name="file-input"
                 accept="image/*"
                 className="form__file-input"
-                onChange={this.fileInputHandler}
                 ref={this.props.refs.fileInput}
               />
             </label>
@@ -180,7 +199,7 @@ class Form extends React.Component<FormProps, FormState> {
             type="submit"
             value="Submit"
             className="form__submit-btn"
-            disabled={!this.state.formValid}
+            /* disabled={!this.state.formValid} */
           />
         </form>
       </>
