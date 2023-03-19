@@ -23,7 +23,7 @@ class Form extends React.Component<FormProps, FormState> {
     this.fileInputHandler = this.fileInputHandler.bind(this);
   }
 
-  checkFormValidation() {
+  async checkFormValidation() {
     this.setState((prevState) => {
       return prevState.nameValid && prevState.surnameValid && prevState.dateOfBirthValid
         ? { formValid: true }
@@ -42,12 +42,14 @@ class Form extends React.Component<FormProps, FormState> {
         surnameValid: regex.test(e.currentTarget.value),
       });
     }
+    this.checkFormValidation();
   }
 
   checkDateOfBirthValidation(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       dateOfBirthValid: e.currentTarget.value !== '' ? true : false,
     });
+    this.checkFormValidation();
   }
 
   fileInputHandler() {
@@ -67,17 +69,20 @@ class Form extends React.Component<FormProps, FormState> {
     return (
       <>
         <form
-          onSubmit={(e) => {
-            this.props.submitHandler(e);
-            this.setState({
-              nameValid: false,
-              surnameValid: false,
-              dateOfBirthValid: false,
-              formValid: false,
-            });
+          onSubmit={async (e) => {
+            e.preventDefault();
+            await this.checkFormValidation();
+            if (this.state.formValid) {
+              this.props.submitHandler(e);
+              this.setState({
+                nameValid: false,
+                surnameValid: false,
+                dateOfBirthValid: false,
+                formValid: true,
+              });
+            } else alert('form not valid');
           }}
           className="form"
-          onChange={this.checkFormValidation}
         >
           <div className="fullname-container">
             <label>
@@ -137,6 +142,14 @@ class Form extends React.Component<FormProps, FormState> {
                 ref={this.props.refs.fileInput}
               />
             </label>
+            <div className="sex-container">
+              <span>Male</span>
+              <label className="switcher">
+                <input type="radio" ref={this.props.refs.sexInput} name="sex-input" value="Male" />
+                <input type="radio" name="sex-input" value="Female" />
+              </label>
+              <span>Female</span>
+            </div>
           </div>
           <label>
             <span className="consent-heading">I consent to my personal data:</span>
@@ -155,19 +168,12 @@ class Form extends React.Component<FormProps, FormState> {
               <label className="consent-checkbox">
                 Residence: <input type="checkbox" ref={this.props.refs.residenceConsentInput} />
               </label>
-              <div className="sex-container">
-                <span>Male</span>
-                <label className="switcher">
-                  <input
-                    type="radio"
-                    ref={this.props.refs.sexInput}
-                    name="sex-input"
-                    value="Male"
-                  />
-                  <input type="radio" name="sex-input" value="Female" />
-                </label>
-                <span>Female</span>
-              </div>
+              <label className="consent-checkbox">
+                Photo: <input type="checkbox" ref={this.props.refs.fileConsentInput} />
+              </label>
+              <label className="consent-checkbox">
+                Sex: <input type="checkbox" ref={this.props.refs.sexConsentInput} />
+              </label>
             </div>
           </label>
           <input
