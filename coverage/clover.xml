@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1678959793939" clover="3.2.0">
-  <project timestamp="1678959793940" name="All files">
+<coverage generated="1679218383060" clover="3.2.0">
+  <project timestamp="1679218383060" name="All files">
     <metrics statements="229" coveredstatements="227" conditionals="32" coveredconditionals="32" methods="21" coveredmethods="20" elements="282" coveredelements="279" complexity="0" loc="229" ncloc="229" packages="2" files="7" classes="7"/>
     <package name="components">
       <metrics statements="144" coveredstatements="144" conditionals="27" coveredconditionals="27" methods="15" coveredmethods="15"/>
-      <file name="card.tsx" path="C:\Users\user\Documents\frontend\react-rsschool\react-components\src\components\card.tsx">
+      <file name="card.tsx" path="C:\Users\user\Documents\frontend\rsschool-react\src\components\card.tsx">
         <metrics statements="45" coveredstatements="45" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -52,7 +52,7 @@
         <line num="44" count="1" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
       </file>
-      <file name="cards.tsx" path="C:\Users\user\Documents\frontend\react-rsschool\react-components\src\components\cards.tsx">
+      <file name="cards.tsx" path="C:\Users\user\Documents\frontend\rsschool-react\src\components\cards.tsx">
         <metrics statements="39" coveredstatements="39" conditionals="13" coveredconditionals="13" methods="6" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -94,7 +94,7 @@
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
       </file>
-      <file name="header.tsx" path="C:\Users\user\Documents\frontend\react-rsschool\react-components\src\components\header.tsx">
+      <file name="header.tsx" path="C:\Users\user\Documents\frontend\rsschool-react\src\components\header.tsx">
         <metrics statements="34" coveredstatements="34" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -131,7 +131,7 @@
         <line num="33" count="1" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
       </file>
-      <file name="input.tsx" path="C:\Users\user\Documents\frontend\react-rsschool\react-components\src\components\input.tsx">
+      <file name="input.tsx" path="C:\Users\user\Documents\frontend\rsschool-react\src\components\input.tsx">
         <metrics statements="26" coveredstatements="26" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -163,7 +163,7 @@
     </package>
     <package name="pages">
       <metrics statements="85" coveredstatements="83" conditionals="5" coveredconditionals="5" methods="6" coveredmethods="5"/>
-      <file name="aboutPage.tsx" path="C:\Users\user\Documents\frontend\react-rsschool\react-components\src\pages\aboutPage.tsx">
+      <file name="aboutPage.tsx" path="C:\Users\user\Documents\frontend\rsschool-react\src\pages\aboutPage.tsx">
         <metrics statements="34" coveredstatements="34" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -200,7 +200,7 @@
         <line num="33" count="1" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
       </file>
-      <file name="errorPage.tsx" path="C:\Users\user\Documents\frontend\react-rsschool\react-components\src\pages\errorPage.tsx">
+      <file name="errorPage.tsx" path="C:\Users\user\Documents\frontend\rsschool-react\src\pages\errorPage.tsx">
         <metrics statements="16" coveredstatements="16" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -219,7 +219,7 @@
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
       </file>
-      <file name="mainPage.tsx" path="C:\Users\user\Documents\frontend\react-rsschool\react-components\src\pages\mainPage.tsx">
+      <file name="mainPage.tsx" path="C:\Users\user\Documents\frontend\rsschool-react\src\pages\mainPage.tsx">
         <metrics statements="35" coveredstatements="33" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
