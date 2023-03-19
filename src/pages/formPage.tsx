@@ -68,7 +68,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     if (this.surnameConsentInput.current) this.surnameConsentInput.current.checked = false;
     if (this.dateOfBirthConsentInput.current) this.dateOfBirthConsentInput.current.checked = false;
     if (this.residenceConsentInput.current) this.residenceConsentInput.current.checked = false;
-    if (this.sexInput.current) this.sexInput.current.checked = false;
+    if (this.sexInput.current) this.sexInput.current.checked = true;
   }
 
   readFileAsync(file: File) {
@@ -81,7 +81,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
   }
 
   async handleFileInput() {
-    if (!this.fileInput.current?.files) return '';
+    if (!this.fileInput.current?.files || this.fileInput.current.files.length === 0) return '';
     const uploadedFile = this.fileInput.current.files[0];
     const res = await this.readFileAsync(uploadedFile);
     const src = typeof res === 'string' ? res : '';
@@ -118,7 +118,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
             surnameConsent: this.surnameConsentInput.current.checked,
             dateOfBirthConsent: this.dateOfBirthConsentInput.current.checked,
             residenceConsent: this.residenceConsentInput.current.checked,
-            sex: this.sexInput.current.checked ? 'female' : 'male',
+            sex: this.sexInput.current.checked ? 'Male' : 'Female',
           },
         ],
       };

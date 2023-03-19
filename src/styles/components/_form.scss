@@ -84,18 +84,19 @@
 
 .switcher {
   position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+  display: inline-flex;
+  width: 4rem;
+  // height: 34px;
+  justify-content: space-between;
 
-  input {
+  /* input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
+  } */
 }
 
-.slider {
+/* .slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -106,9 +107,9 @@
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 34px;
-}
+} */
 
-.slider:before {
+/* .slider:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -127,9 +128,8 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
   transform: translateX(26px);
-}
+} */
 
 .form__submit-btn {
   display: block;

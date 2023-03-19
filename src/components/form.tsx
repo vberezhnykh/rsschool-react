@@ -158,8 +158,14 @@ class Form extends React.Component<FormProps, FormState> {
               <div className="sex-container">
                 <span>Male</span>
                 <label className="switcher">
-                  <input type="checkbox" ref={this.props.refs.sexInput} />
-                  <span className="slider"></span>
+                  <input
+                    type="radio"
+                    ref={this.props.refs.sexInput}
+                    name="sex-input"
+                    value="Male"
+                    defaultChecked
+                  />
+                  <input type="radio" name="sex-input" value="Female" />
                 </label>
                 <span>Female</span>
               </div>
