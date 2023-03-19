@@ -68,7 +68,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     if (this.surnameConsentInput.current) this.surnameConsentInput.current.checked = false;
     if (this.dateOfBirthConsentInput.current) this.dateOfBirthConsentInput.current.checked = false;
     if (this.residenceConsentInput.current) this.residenceConsentInput.current.checked = false;
-    if (this.sexInput.current) this.sexInput.current.checked = true;
+    if (this.sexInput.current) this.sexInput.current.value = '';
   }
 
   readFileAsync(file: File) {

@@ -15,7 +15,7 @@ class Form extends React.Component<FormProps, FormState> {
       nameValid: false,
       surnameValid: false,
       dateOfBirthValid: false,
-      formValid: false,
+      formValid: true,
     };
     this.checkFormValidation = this.checkFormValidation.bind(this);
     this.checkFullNameValidation = this.checkFullNameValidation.bind(this);
@@ -32,7 +32,7 @@ class Form extends React.Component<FormProps, FormState> {
   }
 
   checkFullNameValidation(e: React.ChangeEvent<HTMLInputElement>) {
-    const regex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
+    const regex = /^[A-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
     if (e.currentTarget.name === 'name-input') {
       this.setState({
         nameValid: regex.test(e.currentTarget.value),
@@ -163,7 +163,6 @@ class Form extends React.Component<FormProps, FormState> {
                     ref={this.props.refs.sexInput}
                     name="sex-input"
                     value="Male"
-                    defaultChecked
                   />
                   <input type="radio" name="sex-input" value="Female" />
                 </label>
