@@ -66,7 +66,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     if (this.nameInput.current) this.nameInput.current.value = '';
     if (this.surnameInput.current) this.surnameInput.current.value = '';
     if (this.dateInput.current) this.dateInput.current.value = '';
-    if (this.residenceInput.current) this.residenceInput.current.value = 'Russia';
+    if (this.residenceInput.current) this.residenceInput.current.value = '';
     if (this.fileInput.current) this.fileInput.current.value = '';
     if (this.sexInput.current) this.sexInput.current.value = '';
     if (this.nameConsentInput.current) this.nameConsentInput.current.checked = false;
@@ -103,7 +103,6 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
         !this.surnameInput.current ||
         !this.dateInput.current ||
         !this.residenceInput.current ||
-        !this.fileInput.current ||
         !this.sexInput.current ||
         !this.nameConsentInput.current ||
         !this.surnameConsentInput.current ||
@@ -133,7 +132,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
         ],
       };
     });
-    setTimeout(this.resetInput, 0);
+    // setTimeout(this.resetInput, 0);
   }
 
   render(): React.ReactNode {
@@ -156,7 +155,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
               dateOfBirthConsentInput: this.dateOfBirthConsentInput,
               residenceConsentInput: this.residenceConsentInput,
               fileConsentInput: this.fileConsentInput,
-              sexConsentInput: this.fileConsentInput,
+              sexConsentInput: this.sexConsentInput,
             }}
           />
           <FormCards cards={this.state.cards} clickHandler={this.handleCardClose} />
