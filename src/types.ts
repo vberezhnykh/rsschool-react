@@ -55,7 +55,7 @@ export type FormCardsProps = {
   clickHandler: (card: CardData) => void;
 };
 
-type FormRefs = {
+export type FormRefs = {
   nameInput: React.RefObject<HTMLInputElement>;
   surnameInput: React.RefObject<HTMLInputElement>;
   dateInput: React.RefObject<HTMLInputElement>;

@@ -1,9 +1,9 @@
 .form {
   border: 0.2rem solid $blue;
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  row-gap: 1.5rem;
   font-size: 2rem;
   border-radius: calc(1rem + 1.5rem);
   margin-bottom: 2rem;
@@ -19,7 +19,13 @@
   }
 }
 
+.file-label {
+  display: flex;
+}
+
 .form__file-input {
+  width: 19rem;
+
   &::-webkit-file-upload-button {
     visibility: hidden;
   }
@@ -40,54 +46,34 @@
   &:active::before {
     background-color: $light-blue;
   }
-}
 
-.fullname-container, .date-and-residence-container {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.fullname-errors-container {
-  display: none;
-
-  &--visible {
-    display: flex;
-    // border: 0.1rem solid black;
+  &--loaded {
+    background-color: $light-blue;
+    color: $white;
+    border-radius: 1rem;
+    width: 18rem;
   }
 }
 
-.name-error {
-  visibility: hidden;
-  width: 44%;
-  color: red;
-  font-weight: bold;
-
-  &--visible {
-    visibility: visible;
-  }
-}
-
-.surname-error {
-  visibility: hidden;
-  color: red;
-  font-weight: bold;
-
-  &--visible {
-    visibility: visible;
-  }
-}
-
-.consent-heading {
-  display: block;
-  margin: 0 0 1rem;
-  font-weight: bold;
+.name-error,
+.surname-error,
+.date-of-birth-error,
+.residence-error,
+.file-error {
+  @include error-message;
 }
 
 .consent-container {
+  grid-column-start: 1;
+  grid-column-end: -1;
   display: flex;
-  align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.consent-heading {
+  font-weight: bold;
+  width: 100%;
 }
 
 .consent-checkbox {
@@ -166,6 +152,8 @@ input:checked + .slider:before {
   background-color: $light-blue;
   color: $white;
   cursor: pointer;
+  grid-column-start: 1;
+  grid-column-end: -1;
 
   &:hover {
     opacity: 0.8;

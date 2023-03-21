@@ -111,7 +111,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
         !this.fileConsentInput.current ||
         !this.sexConsentInput.current
       )
-        return;
+        return prevState;
       return {
         cards: [
           ...prevState.cards,
@@ -130,9 +130,10 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
             sexConsent: this.sexConsentInput.current.checked,
           },
         ],
+        isFileLoaded: imageSrc !== '' ? true : false,
       };
     });
-    // setTimeout(this.resetInput, 0);
+    setTimeout(this.resetInput, 0);
   }
 
   render(): React.ReactNode {
