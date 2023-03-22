@@ -5,12 +5,14 @@ import Header from '../components/header';
 import { CardData, FormState } from '../types';
 
 class FormPage extends React.Component<Record<string, unknown>, FormState> {
+  form: React.RefObject<HTMLFormElement>;
   nameInput: React.RefObject<HTMLInputElement>;
   surnameInput: React.RefObject<HTMLInputElement>;
   dateInput: React.RefObject<HTMLInputElement>;
   residenceInput: React.RefObject<HTMLSelectElement>;
   fileInput: React.RefObject<HTMLInputElement>;
-  sexInput: React.RefObject<HTMLInputElement>;
+  maleInput: React.RefObject<HTMLInputElement>;
+  femaleInput: React.RefObject<HTMLInputElement>;
   nameConsentInput: React.RefObject<HTMLInputElement>;
   surnameConsentInput: React.RefObject<HTMLInputElement>;
   dateOfBirthConsentInput: React.RefObject<HTMLInputElement>;
@@ -21,12 +23,14 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
   constructor(props: Record<string, unknown>) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.form = React.createRef();
     this.nameInput = React.createRef();
     this.surnameInput = React.createRef();
     this.dateInput = React.createRef();
     this.residenceInput = React.createRef();
     this.fileInput = React.createRef();
-    this.sexInput = React.createRef();
+    this.maleInput = React.createRef();
+    this.femaleInput = React.createRef();
     this.nameConsentInput = React.createRef();
     this.surnameConsentInput = React.createRef();
     this.dateOfBirthConsentInput = React.createRef();
@@ -39,7 +43,6 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     };
     this.handleCardClose = this.handleCardClose.bind(this);
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
-    this.resetInput = this.resetInput.bind(this);
     this.handleFileInput = this.handleFileInput.bind(this);
     this.readFileAsync = this.readFileAsync.bind(this);
   }
@@ -60,21 +63,6 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     this.setState({
       cards: this.state.cards.filter((cardElement) => cardElement !== card),
     });
-  }
-
-  resetInput() {
-    if (this.nameInput.current) this.nameInput.current.value = '';
-    if (this.surnameInput.current) this.surnameInput.current.value = '';
-    if (this.dateInput.current) this.dateInput.current.value = '';
-    if (this.residenceInput.current) this.residenceInput.current.value = '';
-    if (this.fileInput.current) this.fileInput.current.value = '';
-    if (this.sexInput.current) this.sexInput.current.value = '';
-    if (this.nameConsentInput.current) this.nameConsentInput.current.checked = false;
-    if (this.surnameConsentInput.current) this.surnameConsentInput.current.checked = false;
-    if (this.dateOfBirthConsentInput.current) this.dateOfBirthConsentInput.current.checked = false;
-    if (this.residenceConsentInput.current) this.residenceConsentInput.current.checked = false;
-    if (this.fileConsentInput.current) this.fileConsentInput.current.checked = false;
-    if (this.sexConsentInput.current) this.sexConsentInput.current.checked = false;
   }
 
   readFileAsync(file: File) {
@@ -103,7 +91,8 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
         !this.surnameInput.current ||
         !this.dateInput.current ||
         !this.residenceInput.current ||
-        !this.sexInput.current ||
+        !this.maleInput.current ||
+        !this.femaleInput.current ||
         !this.nameConsentInput.current ||
         !this.surnameConsentInput.current ||
         !this.dateOfBirthConsentInput.current ||
@@ -121,7 +110,9 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
             dateOfBirth: this.dateInput.current.value,
             residence: this.residenceInput.current.value,
             file: imageSrc,
-            sex: this.sexInput.current.checked ? 'Male' : 'Female',
+            sex: this.maleInput.current.checked
+              ? this.maleInput.current.value
+              : this.femaleInput.current.value,
             nameConsent: this.nameConsentInput.current.checked,
             surnameConsent: this.surnameConsentInput.current.checked,
             dateOfBirthConsent: this.dateOfBirthConsentInput.current.checked,
@@ -133,7 +124,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
         isFileLoaded: imageSrc !== '' ? true : false,
       };
     });
-    setTimeout(this.resetInput, 0);
+    setTimeout(() => this.form.current?.reset(), 0);
   }
 
   render(): React.ReactNode {
@@ -150,13 +141,15 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
               dateInput: this.dateInput,
               residenceInput: this.residenceInput,
               fileInput: this.fileInput,
-              sexInput: this.sexInput,
+              maleInput: this.maleInput,
+              femaleInput: this.femaleInput,
               nameConsentInput: this.nameConsentInput,
               surnameConsentInput: this.surnameConsentInput,
               dateOfBirthConsentInput: this.dateOfBirthConsentInput,
               residenceConsentInput: this.residenceConsentInput,
               fileConsentInput: this.fileConsentInput,
               sexConsentInput: this.sexConsentInput,
+              form: this.form,
             }}
           />
           <FormCards cards={this.state.cards} clickHandler={this.handleCardClose} />

@@ -59,7 +59,8 @@
 .surname-error,
 .date-of-birth-error,
 .residence-error,
-.file-error {
+.file-error,
+.switcher-error {
   @include error-message;
 }
 

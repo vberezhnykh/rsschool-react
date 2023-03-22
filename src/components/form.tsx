@@ -8,6 +8,7 @@ type FormState = {
   formValid: boolean;
   residenceValid: boolean;
   fileValid: boolean;
+  sexValid: boolean;
   errorsFields: string[];
 };
 
@@ -21,14 +22,15 @@ class Form extends React.Component<FormProps, FormState> {
       formValid: true,
       residenceValid: false,
       fileValid: false,
+      sexValid: false,
       errorsFields: [],
     };
-    console.log(this.props.refs.fileInput.current?.value);
     this.checkFormValidation = this.checkFormValidation.bind(this);
     this.checkFullNameValidation = this.checkFullNameValidation.bind(this);
     this.checkDateOfBirthValidation = this.checkDateOfBirthValidation.bind(this);
     this.checkResidenceValidation = this.checkResidenceValidation.bind(this);
     this.checkFileValidation = this.checkFileValidation.bind(this);
+    this.checkSexValidation = this.checkSexValidation.bind(this);
   }
 
   async checkFormValidation() {
@@ -72,6 +74,15 @@ class Form extends React.Component<FormProps, FormState> {
     });
   }
 
+  checkSexValidation() {
+    this.setState({
+      sexValid:
+        this.props.refs.maleInput.current?.checked || this.props.refs.femaleInput.current?.checked
+          ? true
+          : false,
+    });
+  }
+
   render(): React.ReactNode {
     return (
       <>
@@ -86,6 +97,8 @@ class Form extends React.Component<FormProps, FormState> {
                 surnameValid: false,
                 dateOfBirthValid: false,
                 residenceValid: false,
+                fileValid: false,
+                sexValid: false,
                 formValid: true,
                 errorsFields: [],
               });
@@ -99,6 +112,7 @@ class Form extends React.Component<FormProps, FormState> {
             }
           }}
           className="form"
+          ref={this.props.refs.form}
         >
           <label>
             Name<span style={{ color: 'red' }}>*</span>:{' '}
@@ -206,12 +220,31 @@ class Form extends React.Component<FormProps, FormState> {
           <div className="sex-container">
             <span>Male</span>
             <label className="switcher">
-              <input type="radio" ref={this.props.refs.sexInput} name="sex-input" value="Male" />
-              <input type="radio" name="sex-input" value="Female" />
+              <input
+                type="radio"
+                ref={this.props.refs.maleInput}
+                name="sex-input"
+                value="Male"
+                onChange={this.checkSexValidation}
+              />
+              <input
+                type="radio"
+                ref={this.props.refs.femaleInput}
+                name="sex-input"
+                value="Female"
+                onChange={this.checkSexValidation}
+              />
             </label>
             <span>Female</span>
           </div>
-          <span>Switcher is invalid.</span>
+          <span
+            className={`switcher-error ${(() =>
+              this.state.errorsFields.includes('sexValid')
+                ? 'switcher-error--visible'
+                : undefined)()}`}
+          >
+            Switcher is invalid.
+          </span>
           <label className="consent-container">
             <span className="consent-heading">I consent to my personal data:</span>
             <label className="consent-checkbox">
