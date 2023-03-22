@@ -91,6 +91,7 @@ class Form extends React.Component<FormProps, FormState> {
             e.preventDefault();
             await this.checkFormValidation();
             if (this.state.formValid) {
+              alert('The form is valid. The data has been saved.');
               this.props.submitHandler(e);
               this.setState({
                 nameValid: false,
@@ -103,7 +104,6 @@ class Form extends React.Component<FormProps, FormState> {
                 errorsFields: [],
               });
             } else {
-              alert('form not valid');
               this.setState((prevState) => {
                 const keys = Object.keys(prevState) as Array<keyof typeof prevState>;
                 const filtered = keys.filter((key) => !prevState[key] && key !== 'formValid');
@@ -126,10 +126,9 @@ class Form extends React.Component<FormProps, FormState> {
             />
           </label>
           <span
-            className={`name-error ${(() =>
-              this.state.errorsFields.includes('nameValid')
-                ? 'name-error--visible'
-                : undefined)()}`}
+            className={`name-error ${
+              this.state.errorsFields.includes('nameValid') ? 'name-error--visible' : undefined
+            }`}
           >
             Name is invalid
           </span>
@@ -145,10 +144,11 @@ class Form extends React.Component<FormProps, FormState> {
             />
           </label>
           <span
-            className={`surname-error ${(() =>
+            className={`surname-error ${
               this.state.errorsFields.includes('surnameValid')
                 ? 'surname-error--visible'
-                : undefined)()}`}
+                : undefined
+            }`}
           >
             Surname is invalid
           </span>
@@ -163,10 +163,11 @@ class Form extends React.Component<FormProps, FormState> {
             />
           </label>
           <span
-            className={`date-of-birth-error ${(() =>
+            className={`date-of-birth-error ${
               this.state.errorsFields.includes('dateOfBirthValid')
                 ? 'date-of-birth-error--visible'
-                : undefined)()}`}
+                : undefined
+            }`}
           >
             Date of Birth is invalid
           </span>
@@ -188,10 +189,11 @@ class Form extends React.Component<FormProps, FormState> {
             </select>
           </label>
           <span
-            className={`residence-error ${(() =>
+            className={`residence-error ${
               this.state.errorsFields.includes('residenceValid')
                 ? 'residence-error--visible'
-                : undefined)()}`}
+                : undefined
+            }`}
           >
             Residence is invalid.
           </span>
@@ -200,20 +202,18 @@ class Form extends React.Component<FormProps, FormState> {
               type="file"
               name="file-input"
               accept="image/*"
-              className={`form__file-input ${(() =>
-                this.props.refs.fileInput.current?.value
-                  ? 'form__file-input--loaded'
-                  : undefined)()}`}
+              className={`form__file-input ${
+                this.props.refs.fileInput.current?.value ? 'form__file-input--loaded' : undefined
+              }`}
               ref={this.props.refs.fileInput}
               onChange={this.checkFileValidation}
             />
             <span style={{ color: 'red' }}>*</span>
           </label>
           <span
-            className={`file-error ${(() =>
-              this.state.errorsFields.includes('fileValid')
-                ? 'file-error--visible'
-                : undefined)()}`}
+            className={`file-error ${
+              this.state.errorsFields.includes('fileValid') ? 'file-error--visible' : undefined
+            }`}
           >
             File is invalid.
           </span>
@@ -238,10 +238,9 @@ class Form extends React.Component<FormProps, FormState> {
             <span>Female</span>
           </div>
           <span
-            className={`switcher-error ${(() =>
-              this.state.errorsFields.includes('sexValid')
-                ? 'switcher-error--visible'
-                : undefined)()}`}
+            className={`switcher-error ${
+              this.state.errorsFields.includes('sexValid') ? 'switcher-error--visible' : undefined
+            }`}
           >
             Switcher is invalid.
           </span>
