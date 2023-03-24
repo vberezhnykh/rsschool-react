@@ -2,9 +2,9 @@ import React from 'react';
 import Form from '../components/form';
 import FormCards from '../components/formCards';
 import Header from '../components/header';
-import { CardData, FormState } from '../types';
+import { CardData, FormPageState as FormPageState } from '../types';
 
-class FormPage extends React.Component<Record<string, unknown>, FormState> {
+class FormPage extends React.Component<Record<string, unknown>, FormPageState> {
   form: React.RefObject<HTMLFormElement>;
   nameInput: React.RefObject<HTMLInputElement>;
   surnameInput: React.RefObject<HTMLInputElement>;
@@ -40,16 +40,20 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     const cardsInLocalStorage = localStorage.getItem('cards');
     this.state = {
       cards: cardsInLocalStorage ? JSON.parse(cardsInLocalStorage) : [],
+      formValid: false,
+      nameValid: false,
+      surnameValid: false,
+      dateOfBirthValid: false,
+      residenceValid: false,
+      fileValid: false,
+      sexValid: false,
+      errorFields: [],
     };
-    this.handleCardClose = this.handleCardClose.bind(this);
-    this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
-    this.handleFileInput = this.handleFileInput.bind(this);
-    this.readFileAsync = this.readFileAsync.bind(this);
   }
 
-  saveStateToLocalStorage() {
+  saveStateToLocalStorage = () => {
     localStorage.setItem('cards', JSON.stringify(this.state.cards));
-  }
+  };
 
   componentDidMount(): void {
     window.addEventListener('beforeunload', this.saveStateToLocalStorage);
@@ -59,31 +63,30 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
     window.removeEventListener('beforeunload', this.saveStateToLocalStorage);
   }
 
-  handleCardClose(card: CardData): void {
+  handleCardClose = (card: CardData): void => {
     this.setState({
       cards: this.state.cards.filter((cardElement) => cardElement !== card),
     });
-  }
+  };
 
-  readFileAsync(file: File) {
+  readFileAsync = (file: File) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
       reader.onerror = reject;
       reader.readAsDataURL(file);
     });
-  }
+  };
 
-  async handleFileInput() {
+  handleFileInput = async () => {
     if (!this.fileInput.current?.files || this.fileInput.current.files.length === 0) return '';
     const uploadedFile = this.fileInput.current.files[0];
     const res = await this.readFileAsync(uploadedFile);
     const src = typeof res === 'string' ? res : '';
     return src;
-  }
+  };
 
-  async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  addCardToState = async () => {
     const imageSrc = await this.handleFileInput();
     this.setState((prevState) => {
       if (
@@ -105,7 +108,7 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
         cards: [
           ...prevState.cards,
           {
-            name: (this.nameInput.current as HTMLInputElement).value,
+            name: this.nameInput.current.value,
             surname: this.surnameInput.current.value,
             dateOfBirth: this.dateInput.current.value,
             residence: this.residenceInput.current.value,
@@ -121,10 +124,93 @@ class FormPage extends React.Component<Record<string, unknown>, FormState> {
             sexConsent: this.sexConsentInput.current.checked,
           },
         ],
-        isFileLoaded: imageSrc !== '' ? true : false,
+        formValid: false,
+        nameValid: false,
+        surnameValid: false,
+        dateOfBirthValid: false,
+        residenceValid: false,
+        fileValid: false,
+        sexValid: false,
+        errorFields: [],
       };
     });
-    setTimeout(() => this.form.current?.reset(), 0);
+  };
+
+  checkFormValidation = async () => {
+    this.checkNameValidation();
+    this.checkSurnameValidation();
+    this.checkDateOfBirthValidation();
+    this.checkResidenceValidation();
+    this.checkFileValidation();
+    this.checkSexValidation();
+    this.setState((prevState) => {
+      return prevState.nameValid &&
+        prevState.surnameValid &&
+        prevState.dateOfBirthValid &&
+        prevState.residenceValid &&
+        prevState.fileValid &&
+        prevState.sexValid
+        ? { formValid: true }
+        : { formValid: false };
+    });
+  };
+
+  checkNameValidation = () => {
+    const regex = /^[A-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
+    this.setState({
+      nameValid: regex.test(this.nameInput.current ? this.nameInput.current.value : ''),
+    });
+  };
+
+  checkSurnameValidation = () => {
+    const regex = /^[A-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
+    this.setState({
+      surnameValid: regex.test(this.surnameInput.current ? this.surnameInput.current.value : ''),
+    });
+  };
+
+  checkDateOfBirthValidation = async () => {
+    this.setState({
+      dateOfBirthValid: this.dateInput.current?.value !== '' ? true : false,
+    });
+  };
+
+  checkResidenceValidation = async () => {
+    this.setState({
+      residenceValid: this.residenceInput.current?.value !== '' ? true : false,
+    });
+  };
+
+  checkFileValidation = async () => {
+    this.setState({
+      fileValid: this.fileInput.current?.value !== '' ? true : false,
+    });
+  };
+
+  checkSexValidation = async () => {
+    this.setState({
+      sexValid: this.maleInput.current?.checked || this.femaleInput.current?.checked ? true : false,
+    });
+  };
+
+  private showErrorMessages() {
+    this.setState((prevState) => {
+      const keys = Object.keys(prevState) as Array<keyof typeof prevState>;
+      const filtered = keys.filter(
+        (key) => !prevState[key] && key !== 'formValid' && key !== 'cards'
+      );
+      return { errorFields: [...filtered] };
+    });
+  }
+
+  async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    await this.checkFormValidation();
+    if (this.state.formValid) {
+      alert('The form is valid, the card has been created!');
+      await this.addCardToState();
+      setTimeout(() => this.form.current?.reset(), 0);
+    } else this.showErrorMessages();
   }
 
   render(): React.ReactNode {

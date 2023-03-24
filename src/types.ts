@@ -46,8 +46,16 @@ export type CardData = {
   sexConsent: boolean;
 };
 
-export type FormState = {
+export type FormPageState = {
   cards: CardData[];
+  formValid: boolean;
+  nameValid: boolean;
+  surnameValid: boolean;
+  dateOfBirthValid: boolean;
+  residenceValid: boolean;
+  fileValid: boolean;
+  sexValid: boolean;
+  errorFields: string[];
 };
 
 export type FormCardsProps = {
@@ -74,6 +82,6 @@ export type FormRefs = {
 
 export type FormProps = {
   submitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
-  state: FormState;
+  state: FormPageState;
   refs: FormRefs;
 };
