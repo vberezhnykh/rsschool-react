@@ -11,6 +11,10 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/tests/setup.js',
-    coverage: { provider: 'c8' },
+    coverage: {
+      provider: 'c8',
+      all: true,
+      exclude: ['src/types.ts', 'src/vite.config.ts', '*.cjs', '*/vite-env.d.ts'],
+    },
   },
 });

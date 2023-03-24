@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/mainPage.tsx</title>
+    <title>Code coverage report for rsschool-react/src/tests/errorPage.test.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">pages</a> mainPage.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">rsschool-react/src/tests</a> errorPage.test.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.28% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/35</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">94.28% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>33/35</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -112,8 +112,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -133,41 +131,43 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Cards from '../components/cards';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import Header from '../components/header';
-import SearchInput from '../components/input';
-import React from 'react';
-import { MainState } from '../types';
+import { BrowserRouter } from 'react-router-dom';
+import ErrorPage from '../pages/errorPage';
 &nbsp;
-class Main extends React.Component&lt;Record&lt;string, never&gt;, MainState&gt; {
-  constructor(props: Record&lt;string, never&gt;) {
-    super(props);
-    this.state = { value: localStorage.getItem('search') ?? '' };
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-&nbsp;
-<span class="fstat-no" title="function not covered" >  handleInputChange(event: React.ChangeEvent&lt;HTMLInputElement&gt;) {</span>
-<span class="cstat-no" title="statement not covered" >    this.setState({ value: event.target.value });</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-&nbsp;
-  componentWillUnmount(): void {
-    localStorage.setItem('search', this.state.value);
-  }
-&nbsp;
-  render() {
-    return (
-      &lt;&gt;
-        &lt;Header page="Main Page"&gt;&lt;/Header&gt;
-        &lt;main className="main"&gt;
-          &lt;SearchInput value={this.state.value} onChange={this.handleInputChange} /&gt;
-          &lt;Cards value={this.state.value} /&gt;
-        &lt;/main&gt;
-      &lt;/&gt;
+describe('Error Page', () =&gt; {
+  it('renders Header component', () =&gt; {
+    render(
+      &lt;BrowserRouter&gt;
+        &lt;Header page="Error Page" /&gt;
+      &lt;/BrowserRouter&gt;
     );
-  }
-}
+  });
 &nbsp;
-export default Main;
+  it('renders not-found image', () =&gt; {
+    render(
+      &lt;BrowserRouter&gt;
+        &lt;ErrorPage /&gt;
+      &lt;/BrowserRouter&gt;
+    );
+    expect(screen.getByRole('img')).toBeInTheDocument();
+    expect(screen.getByAltText(/Not found image/i)).toBeInTheDocument();
+  });
+&nbsp;
+  it('renders heading', () =&gt; {
+    render(
+      &lt;BrowserRouter&gt;
+        &lt;ErrorPage /&gt;
+      &lt;/BrowserRouter&gt;
+    );
+    expect(screen.getByRole('heading')).toBeInTheDocument();
+    expect(screen.getByText(/Oops...page not found./i)).toBeInTheDocument();
+  });
+});
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -175,16 +175,16 @@ export default Main;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-16T09:43:13.820Z
+                at 2023-03-24T12:53:29.829Z
             </div>
-        <script src="../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     
