@@ -16,6 +16,7 @@ class FormTextAndDateInput extends React.Component<FormInputProps> {
               ref={this.props.inputRef}
               className={this.props.className}
               placeholder={this.props.placeholder}
+              role={this.props.inputType === 'date' ? 'datepicker' : 'textbox'}
             />
           </label>
           <ErrorField {...this.props} />
