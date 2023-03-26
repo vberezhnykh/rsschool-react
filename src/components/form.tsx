@@ -90,7 +90,12 @@ class Form extends React.Component<FormProps> {
 
     return (
       <>
-        <form onSubmit={this.props.submitHandler} className="form" ref={this.props.refs.form}>
+        <form
+          onSubmit={this.props.submitHandler}
+          className="form"
+          ref={this.props.refs.form}
+          role="form"
+        >
           {textInputs.map((textInput) => (
             <FormTextAndDateInput key={textInput.inputName} {...textInput} />
           ))}

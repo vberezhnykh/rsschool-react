@@ -6,7 +6,6 @@ import FormCards from '../components/formCards';
 describe('FormCards', () => {
   it('renders correctly if there is no cards', () => {
     render(<FormCards cards={[]} clickHandler={() => {}} />);
-    screen.debug();
     expect(screen.getByText('Nothing has been sumbitted yet.')).toBeInTheDocument();
   });
 
