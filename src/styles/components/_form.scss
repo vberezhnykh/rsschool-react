@@ -38,20 +38,12 @@
     padding: 0.5rem;
     outline: none;
     white-space: nowrap;
-    // -webkit-user-select: none;
     cursor: pointer;
     font-size: 2rem;
   }
 
   &:active::before {
     background-color: $light-blue;
-  }
-
-  &--loaded {
-    background-color: $light-blue;
-    color: $white;
-    border-radius: 1rem;
-    width: 18rem;
   }
 }
 

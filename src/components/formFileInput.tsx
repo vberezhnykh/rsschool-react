@@ -13,7 +13,7 @@ class FormFileInput extends React.Component<FormInputProps> {
             accept={this.props.accept}
             ref={this.props.inputRef}
             className={`${this.props.className} ${
-              this.props.inputRef.current?.value ? this.props.className + '--loaded' : undefined
+              this.props.inputRef.current?.value ? this.props.className : undefined
             }`}
           />
           <span style={{ color: 'red' }}>*</span>

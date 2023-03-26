@@ -19,7 +19,6 @@ describe('FormSelect', () => {
     render(<FormSelect formPageState={formPageState} selectRef={React.createRef()} />);
     const select = screen.getByRole('combobox');
     const options = screen.getAllByRole('option');
-    screen.debug();
 
     expect(screen.getByLabelText('Residence*:')).toBeInTheDocument();
     expect(select).toBeInTheDocument();
