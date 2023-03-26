@@ -2,39 +2,40 @@ import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { HeaderProps } from '../types';
 
-class Header extends React.Component<HeaderProps> {
-  constructor(props: HeaderProps) {
-    super(props);
-  }
-  render() {
-    return (
-      <header className="header">
-        <div className="header-container">
-          <span>{this.props.page}</span>
-          <nav className="navigation">
+const Header: React.FC<HeaderProps> = ({ page }) => {
+  const navLinks = [
+    {
+      to: '/',
+      text: 'Main',
+    },
+    {
+      to: '/form',
+      text: 'Form',
+    },
+    {
+      to: '/about',
+      text: 'About',
+    },
+  ];
+
+  return (
+    <header className="header">
+      <div className="header-container">
+        <span>{page}</span>
+        <nav className="navigation">
+          {...navLinks.map((navLink) => (
             <NavLink
-              to={'/'}
+              key={navLink.text}
+              to={navLink.to}
               className={({ isActive }) => (isActive ? 'nav-list__item--active' : undefined)}
             >
-              Main
+              {navLink.text}
             </NavLink>
-            <NavLink
-              to={'/form'}
-              className={({ isActive }) => (isActive ? 'nav-list__item--active' : undefined)}
-            >
-              Form
-            </NavLink>
-            <NavLink
-              to={'/about'}
-              className={({ isActive }) => (isActive ? 'nav-list__item--active' : undefined)}
-            >
-              About
-            </NavLink>
-          </nav>
-        </div>
-      </header>
-    );
-  }
-}
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+};
 
 export default Header;
