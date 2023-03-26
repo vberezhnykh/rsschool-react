@@ -51,7 +51,11 @@ class FormCards extends React.Component<FormCardsProps> {
               <li>Sex: {card.sexConsent ? '✓' : '✗'}</li>
             </ul>
           </div>
-          <img src={card.file} alt="" className="form-cards__image" />
+          <img
+            src={card.file}
+            alt={`Image of ${card.name} ${card.surname}`}
+            className="form-cards__image"
+          />
         </div>
       </li>
     ));
