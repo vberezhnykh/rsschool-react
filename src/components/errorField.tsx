@@ -1,12 +1,5 @@
 import React from 'react';
-import { FormPageState } from '../types';
-
-type ErrorFieldProps = {
-  errorClassName?: string;
-  errorMessage?: string;
-  errorFieldName?: string;
-  formPageState: FormPageState;
-};
+import { ErrorFieldProps } from '../types';
 
 class ErrorField extends React.Component<ErrorFieldProps> {
   render(): React.ReactNode {

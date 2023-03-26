@@ -1,10 +1,5 @@
 import React from 'react';
-
-type FormCheckboxInputProps = {
-  labelText: string;
-  inputName: string;
-  inputRef: React.RefObject<HTMLInputElement>;
-};
+import { FormCheckboxInputProps } from '../types';
 
 class FormCheckboxInput extends React.Component<FormCheckboxInputProps> {
   render(): React.ReactNode {

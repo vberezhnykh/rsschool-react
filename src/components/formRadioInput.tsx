@@ -1,12 +1,6 @@
 import React from 'react';
-import { FormPageState } from '../types';
+import { FormRadioInputProps } from '../types';
 import ErrorField from './errorField';
-
-type FormRadioInputProps = {
-  maleInputRef: React.RefObject<HTMLInputElement>;
-  femaleInputRef: React.RefObject<HTMLInputElement>;
-  formPageState: FormPageState;
-};
 
 class FormRadioInput extends React.Component<FormRadioInputProps> {
   render(): React.ReactNode {

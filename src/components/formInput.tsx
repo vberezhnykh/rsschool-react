@@ -1,22 +1,8 @@
 import React from 'react';
-import { FormPageState } from '../types';
+import { FormInputProps } from '../types';
 import ErrorField from './errorField';
 
-type FormTextAndDateInputProps = {
-  inputType: string;
-  inputName: string;
-  labelText?: string;
-  labelClassName?: string;
-  inputRef: React.RefObject<HTMLInputElement>;
-  className: string;
-  placeholder?: string;
-  errorClassName?: string;
-  errorMessage?: string;
-  errorFieldName?: string;
-  formPageState: FormPageState;
-};
-
-class FormTextAndDateInput extends React.Component<FormTextAndDateInputProps> {
+class FormTextAndDateInput extends React.Component<FormInputProps> {
   render(): React.ReactNode {
     if (this.props.inputType === 'text' || this.props.inputType === 'date') {
       return (

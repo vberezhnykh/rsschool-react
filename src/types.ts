@@ -85,3 +85,38 @@ export type FormProps = {
   state: FormPageState;
   refs: FormRefs;
 };
+
+export type ErrorFieldProps = {
+  errorClassName?: string;
+  errorMessage?: string;
+  errorFieldName?: string;
+  formPageState: FormPageState;
+};
+
+export interface FormInputProps extends ErrorFieldProps {
+  inputType?: string;
+  inputName: string;
+  labelText?: string;
+  labelClassName?: string;
+  inputRef: React.RefObject<HTMLInputElement>;
+  className: string;
+  placeholder?: string;
+  accept?: string;
+}
+
+export type FormSelectProps = {
+  selectRef: React.RefObject<HTMLSelectElement>;
+  formPageState: FormPageState;
+};
+
+export type FormRadioInputProps = {
+  maleInputRef: React.RefObject<HTMLInputElement>;
+  femaleInputRef: React.RefObject<HTMLInputElement>;
+  formPageState: FormPageState;
+};
+
+export type FormCheckboxInputProps = {
+  labelText: string;
+  inputName: string;
+  inputRef: React.RefObject<HTMLInputElement>;
+};

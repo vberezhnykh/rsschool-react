@@ -1,20 +1,8 @@
 import React from 'react';
-import { FormPageState } from '../types';
+import { FormInputProps } from '../types';
 import ErrorField from './errorField';
 
-type FormFileInputProps = {
-  labelClassName: string;
-  inputName: string;
-  accept: string;
-  inputRef: React.RefObject<HTMLInputElement>;
-  className: string;
-  errorClassName?: string;
-  errorMessage?: string;
-  errorFieldName?: string;
-  formPageState: FormPageState;
-};
-
-class FormFileInput extends React.Component<FormFileInputProps> {
+class FormFileInput extends React.Component<FormInputProps> {
   render(): React.ReactNode {
     return (
       <>

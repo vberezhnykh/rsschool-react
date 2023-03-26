@@ -1,11 +1,6 @@
 import React from 'react';
-import { FormPageState } from '../types';
+import { FormSelectProps } from '../types';
 import ErrorField from './errorField';
-
-type FormSelectProps = {
-  selectRef: React.RefObject<HTMLSelectElement>;
-  formPageState: FormPageState;
-};
 
 class FormSelect extends React.Component<FormSelectProps> {
   render(): React.ReactNode {
