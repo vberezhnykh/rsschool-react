@@ -1,10 +1,11 @@
 import React from 'react';
 import { FormPageState } from '../types';
+import ErrorField from './errorField';
 
 type FormRadioInputProps = {
   maleInputRef: React.RefObject<HTMLInputElement>;
   femaleInputRef: React.RefObject<HTMLInputElement>;
-  formPageState?: FormPageState;
+  formPageState: FormPageState;
 };
 
 class FormRadioInput extends React.Component<FormRadioInputProps> {
@@ -19,15 +20,12 @@ class FormRadioInput extends React.Component<FormRadioInputProps> {
           </label>
           <span>Female</span>
         </div>
-        <span
-          className={`switcher-error ${
-            this.props.formPageState?.errorFields.includes('sexValid')
-              ? 'switcher-error--visible'
-              : undefined
-          }`}
-        >
-          Switcher is invalid.
-        </span>
+        <ErrorField
+          errorClassName="switcher-error"
+          errorMessage="Switcher is invalid"
+          errorFieldName="sexValid"
+          formPageState={this.props.formPageState}
+        />
       </>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormPageState } from '../types';
+import ErrorField from './errorField';
 
 type FormSelectProps = {
   selectRef: React.RefObject<HTMLSelectElement>;
@@ -22,15 +23,12 @@ class FormSelect extends React.Component<FormSelectProps> {
             <option value="Other">Other</option>
           </select>
         </label>
-        <span
-          className={`residence-error ${
-            this.props.formPageState.errorFields.includes('residenceValid')
-              ? 'residence-error--visible'
-              : undefined
-          }`}
-        >
-          Residence is invalid.
-        </span>
+        <ErrorField
+          errorClassName="residence-error"
+          errorMessage="Residence is invalid"
+          errorFieldName="residenceValid"
+          formPageState={this.props.formPageState}
+        />
       </>
     );
   }

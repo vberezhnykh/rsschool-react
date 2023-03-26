@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormPageState } from '../types';
+import ErrorField from './errorField';
 
 type FormTextAndDateInputProps = {
   inputType: string;
@@ -12,7 +13,7 @@ type FormTextAndDateInputProps = {
   errorClassName?: string;
   errorMessage?: string;
   errorFieldName?: string;
-  formPageState?: FormPageState;
+  formPageState: FormPageState;
 };
 
 class FormTextAndDateInput extends React.Component<FormTextAndDateInputProps> {
@@ -31,15 +32,7 @@ class FormTextAndDateInput extends React.Component<FormTextAndDateInputProps> {
               placeholder={this.props.placeholder}
             />
           </label>
-          <span
-            className={`${this.props.errorClassName} ${
-              this.props.formPageState?.errorFields.includes(this.props.errorFieldName ?? '')
-                ? `${this.props.errorClassName}--visible`
-                : undefined
-            }`}
-          >
-            {this.props.errorMessage}
-          </span>
+          <ErrorField {...this.props} />
         </>
       );
     }

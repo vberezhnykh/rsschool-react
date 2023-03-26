@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormPageState } from '../types';
+import ErrorField from './errorField';
 
 type FormFileInputProps = {
   labelClassName: string;
@@ -10,7 +11,7 @@ type FormFileInputProps = {
   errorClassName?: string;
   errorMessage?: string;
   errorFieldName?: string;
-  formPageState?: FormPageState;
+  formPageState: FormPageState;
 };
 
 class FormFileInput extends React.Component<FormFileInputProps> {
@@ -29,15 +30,7 @@ class FormFileInput extends React.Component<FormFileInputProps> {
           />
           <span style={{ color: 'red' }}>*</span>
         </label>
-        <span
-          className={`${this.props.errorClassName} ${
-            this.props.formPageState?.errorFields.includes(this.props.errorFieldName ?? '')
-              ? `${this.props.errorClassName}--visible`
-              : undefined
-          }`}
-        >
-          {this.props.errorMessage}
-        </span>
+        <ErrorField {...this.props} />
       </>
     );
   }
