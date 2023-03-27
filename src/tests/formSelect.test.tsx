@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import FormSelect from '../components/formSelect';
 
 describe('FormSelect', () => {
   it('renders form select input', () => {

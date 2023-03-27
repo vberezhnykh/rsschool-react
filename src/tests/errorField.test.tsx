@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import ErrorField from '../components/errorField';
 
 describe('ErrorField', () => {
   it('renders the error message when the error field name is in the list of error fields', () => {
