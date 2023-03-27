@@ -2,26 +2,24 @@ import React from 'react';
 import { FormInputProps } from '../types';
 import ErrorField from './errorField';
 
-class FormFileInput extends React.Component<FormInputProps> {
-  render(): React.ReactNode {
-    return (
-      <>
-        <label className={this.props.labelClassName}>
-          <input
-            type="file"
-            name={this.props.inputName}
-            accept={this.props.accept}
-            ref={this.props.inputRef}
-            className={`${this.props.className} ${
-              this.props.inputRef.current?.value ? this.props.className : undefined
-            }`}
-          />
-          <span style={{ color: 'red' }}>*</span>
-        </label>
-        <ErrorField {...this.props} />
-      </>
-    );
-  }
-}
+const FormFileInput: React.FC<FormInputProps> = (props) => {
+  return (
+    <>
+      <label className={props.labelClassName}>
+        <input
+          type="file"
+          name={props.inputName}
+          accept={props.accept}
+          ref={props.inputRef}
+          className={`${props.className} ${
+            props.inputRef.current?.value ? props.className : undefined
+          }`}
+        />
+        <span style={{ color: 'red' }}>*</span>
+      </label>
+      <ErrorField {...props} />
+    </>
+  );
+};
 
 export default FormFileInput;
