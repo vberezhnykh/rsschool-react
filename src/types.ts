@@ -1,3 +1,5 @@
+import { SubmitHandler } from 'react-hook-form';
+
 export type Post = {
   body: string;
   id: number;
@@ -119,4 +121,26 @@ export type FormCheckboxInputProps = {
   labelText: string;
   inputName: string;
   inputRef: React.RefObject<HTMLInputElement>;
+};
+
+export type FormInputs = {
+  name: string;
+  surname: string;
+  dateOfBirth: string;
+  file: FileList;
+  residence: string;
+  sex: string;
+  consents: string[];
+};
+
+export type FormCardData = Omit<FormInputs, 'file'> & { fileUrl: string };
+
+export type NewFormCardsProps = {
+  cards: Array<FormCardData>;
+  clickHandler: (card: FormCardData) => void;
+};
+
+export type NewFormProps = {
+  submitHandler: SubmitHandler<FormInputs>;
+  formRef: React.RefObject<HTMLFormElement>;
 };

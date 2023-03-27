@@ -1,120 +1,152 @@
-import React from 'react';
-import { FormProps } from '../types';
-import FormCheckboxInput from './formCheckboxInput';
-import FormFileInput from './formFileInput';
-import FormTextAndDateInput from './formInput';
-import FormRadioInput from './formRadioInput';
-import FormSelect from './formSelect';
+import { useForm } from 'react-hook-form';
+import { FormInputs, NewFormProps } from '../types';
 
-const Form: React.FC<FormProps> = ({ submitHandler, state, refs }) => {
-  const textInputs = [
-    {
-      inputType: 'text',
-      inputName: 'name-input',
-      labelText: 'Name',
-      inputRef: refs.nameInput,
-      className: 'form__name-input',
-      placeholder: 'Enter your name...',
-      errorClassName: 'name-error',
-      errorMessage: 'Name is invalid',
-      errorFieldName: 'nameValid',
-      formPageState: state,
-    },
-    {
-      inputType: 'text',
-      inputName: 'surname-input',
-      labelText: 'Surname',
-      inputRef: refs.surnameInput,
-      className: 'form__surname-input',
-      placeholder: 'Enter your surname...',
-      errorClassName: 'surname-error',
-      errorMessage: 'Surame is invalid',
-      errorFieldName: 'surnameValid',
-      formPageState: state,
-    },
-    {
-      inputType: 'date',
-      inputName: 'date-of-birth-input',
-      labelText: 'Date of Birth',
-      inputRef: refs.dateInput,
-      className: 'form__date-input',
-      errorClassName: 'date-of-birth-error',
-      errorMessage: 'Date of Birth is invalid',
-      errorFieldName: 'dateOfBirthValid',
-      formPageState: state,
-    },
-  ];
+const Form: React.FC<NewFormProps> = ({ submitHandler, formRef }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>();
+
+  const regex = /^[A-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
+
   const checkboxes = [
     {
-      inputType: 'checkbox',
       inputName: 'name-consent',
       labelText: 'Name',
-      inputRef: refs.nameConsentInput,
+      value: 'name',
     },
     {
-      inputType: 'checkbox',
       inputName: 'surname-consent',
       labelText: 'Surname',
-      inputRef: refs.surnameConsentInput,
+      value: 'surname',
     },
     {
-      inputType: 'checkbox',
       inputName: 'date-of-birth-consent',
       labelText: 'Date of Birth',
-      inputRef: refs.dateOfBirthConsentInput,
+      value: 'date-of-birth',
     },
     {
-      inputType: 'checkbox',
       inputName: 'residence-consent',
       labelText: 'Residence',
-      inputRef: refs.residenceConsentInput,
+      value: 'residence',
     },
     {
-      inputType: 'checkbox',
       inputName: 'photo-consent',
       labelText: 'Photo',
-      inputRef: refs.fileConsentInput,
+      value: 'photo',
     },
     {
-      inputType: 'checkbox',
       inputName: 'sex-consent',
       labelText: 'Sex',
-      inputRef: refs.sexConsentInput,
+      value: 'sex',
     },
   ];
 
   return (
-    <>
-      <form onSubmit={submitHandler} className="form" ref={refs.form} role="form">
-        {textInputs.map((textInput) => (
-          <FormTextAndDateInput key={textInput.inputName} {...textInput} />
-        ))}
-        <FormFileInput
-          inputName="file-input"
+    <form onSubmit={handleSubmit(submitHandler)} className="form" role="form" ref={formRef}>
+      <label>
+        Name<span style={{ color: 'red' }}>*</span>:{' '}
+        <input
+          type="text"
+          {...register('name', {
+            pattern: { value: regex, message: 'Name is invalid' },
+            required: 'Name is required',
+          })}
+          className={`form__name-input ${errors.name ? 'form__name-input--invalid' : undefined}`}
+        />
+      </label>
+      <span className={'name-error name-error--visible'}>
+        {errors.name ? <>{errors.name.message}</> : null}
+      </span>
+      <label>
+        Surname<span style={{ color: 'red' }}>*</span>:{' '}
+        <input
+          type="text"
+          {...register('surname', {
+            pattern: { value: regex, message: 'Surname is invalid' },
+            required: 'Surname is required',
+          })}
+          className={`form__surname-input ${
+            errors.surname ? 'form__surname-input--invalid' : undefined
+          }`}
+        />
+      </label>
+      <span className={'surname-error surname-error--visible'}>
+        {errors.surname ? <>{errors.surname.message}</> : null}
+      </span>
+      <label>
+        Date of Birth<span style={{ color: 'red' }}>*</span>:{' '}
+        <input
+          type="date"
+          {...register('dateOfBirth', { required: 'Date of Birth is required' })}
+          className={`form__date-input ${
+            errors.dateOfBirth ? 'form__date-input--invalid' : undefined
+          }`}
+        />
+      </label>
+      <span className={'date-of-birth-error date-of-birth-error--visible'}>
+        {errors.dateOfBirth ? <>{errors.dateOfBirth.message}</> : null}
+      </span>
+      <label className="file-label">
+        <input
+          type="file"
           accept="image/*"
-          inputRef={refs.fileInput}
-          className="form__file-input"
-          errorMessage="File is invalid"
-          errorFieldName="fileValid"
-          errorClassName="file-error"
-          formPageState={state}
-          labelClassName="file-label"
+          className={`form__file-input ${errors.file ? 'form__file-input--invalid' : undefined}`}
+          {...register('file', { required: 'Photo is required' })}
         />
-        <FormSelect selectRef={refs.residenceInput} formPageState={state} />
-        <FormRadioInput
-          maleInputRef={refs.maleInput}
-          femaleInputRef={refs.femaleInput}
-          formPageState={state}
-        />
-        <label className="consent-container">
-          <span className="consent-heading">I consent to my personal data:</span>
-          {...checkboxes.map((checkbox) => (
-            <FormCheckboxInput key={`${checkbox.inputName}`} {...checkbox} />
-          ))}
+        <span style={{ color: 'red' }}>*</span>
+      </label>
+      <span className={'file-error file-error--visible'}>
+        {errors.file ? <>{errors.file.message}</> : null}
+      </span>
+      <label>
+        Residence<span style={{ color: 'red' }}>*</span>:{' '}
+        <select
+          {...register('residence', { required: 'Residence is required' })}
+          className={`form__residence-input ${
+            errors.residence ? 'form__residence-input--invalid' : undefined
+          }`}
+          defaultValue=""
+        >
+          <option disabled value="">
+            select
+          </option>
+          <option value="Russia">Russia</option>
+          <option value="Ukraine">Ukraine</option>
+          <option value="Belarus">Belarus</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+      <span className={'residence-error residence-error--visible'}>
+        {errors.residence ? <>{errors.residence.message}</> : null}
+      </span>
+      <div className="sex-container">
+        <span>Male</span>
+        <label className="switcher">
+          <input type="radio" value="Male" {...register('sex', { required: 'Sex is required' })} />
+          <input
+            type="radio"
+            value="Female"
+            {...register('sex', { required: 'Sex is required' })}
+          />
         </label>
-        <input type="submit" value="Submit" className="form__submit-btn" />
-      </form>
-    </>
+        <span>Female</span>
+      </div>
+      <span className={'switcher-error switcher-error--visible'}>
+        {errors.sex ? <>{errors.sex.message}</> : null}
+      </span>
+      <div className="consent-container">
+        <span className="consent-heading">I consent to my personal data:</span>
+        {...checkboxes.map((checkbox, index) => (
+          <label className="consent-checkbox" key={checkbox.inputName + index}>
+            {checkbox.labelText}:{' '}
+            <input type="checkbox" {...register('consents')} value={checkbox.value}></input>
+          </label>
+        ))}
+      </div>
+      <input type="submit" value="Submit" className="form__submit-btn" />
+    </form>
   );
 };
 
