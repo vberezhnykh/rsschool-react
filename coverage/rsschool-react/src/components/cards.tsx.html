@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>39/39</span>
+                <span class='fraction'>34/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>39/39</span>
+                <span class='fraction'>34/34</span>
             </div>
         
             
@@ -97,21 +97,12 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -123,6 +114,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -132,8 +124,6 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -146,38 +136,33 @@ import MockPosts from '../dummy.json';
 import Card from './card';
 import { CardsProps, Post, Posts } from '../types';
 &nbsp;
-class Cards extends React.Component&lt;CardsProps&gt; {
-  constructor(props: CardsProps) {
-    super(props);
-  }
-&nbsp;
-  getFilteredPosts(posts: Posts) {
+const Cards: React.FC&lt;CardsProps&gt; = ({ value }) =&gt; {
+  function getFilteredPosts(posts: Posts) {
     return posts.posts.filter(
       (post) =&gt;
-        post.body.toLowerCase().includes(this.props.value.toLowerCase()) ||
-        post.title.toLowerCase().includes(this.props.value.toLowerCase()) ||
-        post.tags.some((tag) =&gt; tag.toLowerCase().includes(this.props.value.toLowerCase()))
+        post.body.toLowerCase().includes(value.toLowerCase()) ||
+        post.title.toLowerCase().includes(value.toLowerCase()) ||
+        post.tags.some((tag) =&gt; tag.toLowerCase().includes(value.toLowerCase()))
     );
   }
 &nbsp;
-  getListItems = (filteredPosts: Array&lt;Post&gt;) =&gt;
-    filteredPosts.map((post) =&gt; &lt;Card {...post} key={post.id} /&gt;);
+  function getListItems(filteredPosts: Array&lt;Post&gt;) {
+    return filteredPosts.map((post) =&gt; &lt;Card {...post} key={post.id} /&gt;);
+  }
 &nbsp;
-  getCards() {
-    const filteredPosts = this.getFilteredPosts(MockPosts);
+  function getCards() {
+    const filteredPosts = getFilteredPosts(MockPosts);
     return filteredPosts.length === 0 ? (
       &lt;div className="cards__item--not-found"&gt;No results were found for your query...&lt;/div&gt;
     ) : (
       &lt;ul className="cards" data-testid="cards-list"&gt;
-        {this.getListItems(filteredPosts)}
+        {getListItems(filteredPosts)}
       &lt;/ul&gt;
     );
   }
 &nbsp;
-  render(): React.ReactNode {
-    return this.getCards();
-  }
-}
+  return getCards();
+};
 &nbsp;
 export default Cards;
 &nbsp;</pre></td></tr></table></pre>
@@ -187,7 +172,7 @@ export default Cards;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-26T11:26:18.383Z
+                at 2023-03-28T09:27:19.946Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

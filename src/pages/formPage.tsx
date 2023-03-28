@@ -9,7 +9,7 @@ import { FormInputs, FormCardData } from '../types';
 const FormPage = () => {
   const formRef = React.createRef<HTMLFormElement>();
   const cardsInLocalStorage = localStorage.getItem('cards');
-  const [cards, updateCards] = useState<FormCardData[]>(
+  const [cards, setCards] = useState<FormCardData[]>(
     cardsInLocalStorage ? JSON.parse(cardsInLocalStorage) : []
   );
 
@@ -24,7 +24,7 @@ const FormPage = () => {
   });
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    updateCards([
+    setCards([
       ...cards,
       {
         name: data.name,
@@ -40,7 +40,7 @@ const FormPage = () => {
   };
 
   const handleCardClose = (card: FormCardData): void => {
-    updateCards(cards.filter((cardEl) => cardEl !== card));
+    setCards(cards.filter((cardEl) => cardEl !== card));
   };
 
   return (

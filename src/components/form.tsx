@@ -54,6 +54,7 @@ const Form: React.FC<NewFormProps> = ({ submitHandler, formRef }) => {
             required: 'Name is required',
           })}
           className={`form__name-input ${errors.name ? 'form__name-input--invalid' : undefined}`}
+          placeholder="Enter name here..."
         />
       </label>
       <span className={'name-error name-error--visible'}>
@@ -70,6 +71,7 @@ const Form: React.FC<NewFormProps> = ({ submitHandler, formRef }) => {
           className={`form__surname-input ${
             errors.surname ? 'form__surname-input--invalid' : undefined
           }`}
+          placeholder="Enter surname here..."
         />
       </label>
       <span className={'surname-error surname-error--visible'}>
@@ -79,10 +81,14 @@ const Form: React.FC<NewFormProps> = ({ submitHandler, formRef }) => {
         Date of Birth<span style={{ color: 'red' }}>*</span>:{' '}
         <input
           type="date"
-          {...register('dateOfBirth', { required: 'Date of Birth is required' })}
+          {...register('dateOfBirth', {
+            required: 'Date of Birth is required',
+          })}
           className={`form__date-input ${
             errors.dateOfBirth ? 'form__date-input--invalid' : undefined
           }`}
+          max={new Date().toISOString().split('T')[0]}
+          role="datepicker"
         />
       </label>
       <span className={'date-of-birth-error date-of-birth-error--visible'}>
@@ -94,6 +100,7 @@ const Form: React.FC<NewFormProps> = ({ submitHandler, formRef }) => {
           accept="image/*"
           className={`form__file-input ${errors.file ? 'form__file-input--invalid' : undefined}`}
           {...register('file', { required: 'Photo is required' })}
+          role="fileloader"
         />
         <span style={{ color: 'red' }}>*</span>
       </label>

@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>37/37</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
                 <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>2/2</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>37/37</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
@@ -94,22 +94,12 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-yes">61x</span>
@@ -120,8 +110,6 @@
 <span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-yes">61x</span>
@@ -134,19 +122,15 @@
 <span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-yes">61x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">61x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import favoriteImg from '../assets/favorite.svg';
 import { Post } from '../types';
 &nbsp;
-class Card extends React.Component&lt;Post&gt; {
-  constructor(props: Post) {
-    super(props);
-  }
-&nbsp;
-  getTags(tags: string[]) {
+const Card: React.FC&lt;Post&gt; = (post) =&gt; {
+  function getTags(tags: string[]) {
     return (
       &lt;ul className="card-tags"&gt;
         {tags.map((tag, index) =&gt; (
@@ -158,20 +142,18 @@ class Card extends React.Component&lt;Post&gt; {
     );
   }
 &nbsp;
-  render() {
-    return (
-      &lt;li className="cards__item"&gt;
-        &lt;h3 className="card__title"&gt;{this.props.title}&lt;/h3&gt;
-        &lt;p className="card__body"&gt;{this.props.body}&lt;/p&gt;
-        {this.getTags(this.props.tags)}
-        &lt;div className="card-reactions"&gt;
-          &lt;img src={favoriteImg} alt="Favorite image." className="card-reactions__img" /&gt;
-          &lt;span className="card-reactions__number"&gt;{this.props.reactions}&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/li&gt;
-    );
-  }
-}
+  return (
+    &lt;li className="cards__item"&gt;
+      &lt;h3 className="card__title"&gt;{post.title}&lt;/h3&gt;
+      &lt;p className="card__body"&gt;{post.body}&lt;/p&gt;
+      {getTags(post.tags)}
+      &lt;div className="card-reactions"&gt;
+        &lt;img src={favoriteImg} alt="Favorite image." className="card-reactions__img" /&gt;
+        &lt;span className="card-reactions__number"&gt;{post.reactions}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+  );
+};
 &nbsp;
 export default Card;
 &nbsp;</pre></td></tr></table></pre>
@@ -181,7 +163,7 @@ export default Card;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-26T11:26:18.383Z
+                at 2023-03-28T09:27:19.946Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
