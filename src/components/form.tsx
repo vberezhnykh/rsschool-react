@@ -6,7 +6,7 @@ const Form: React.FC<NewFormProps> = ({ submitHandler, formRef }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputs>();
+  } = useForm<FormInputs>({ reValidateMode: 'onSubmit' });
 
   const regex = /^[A-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g;
 
