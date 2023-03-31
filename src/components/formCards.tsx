@@ -48,7 +48,11 @@ const FormCards: React.FC<NewFormCardsProps> = ({ cards, clickHandler }) => {
       </div>
     </li>
   ));
-  return <ul className="form-cards">{listItems}</ul>;
+  return (
+    <ul className="form-cards" data-testid="form-cards">
+      {listItems}
+    </ul>
+  );
 };
 
 export default FormCards;
