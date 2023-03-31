@@ -45,7 +45,7 @@ const FormPage = () => {
 
   return (
     <>
-      <Header page="New Form Page" />
+      <Header page="Form Page" />
       <main className="main">
         <Form submitHandler={onSubmit} formRef={formRef} />
         <FormCards cards={cards} clickHandler={handleCardClose} />
