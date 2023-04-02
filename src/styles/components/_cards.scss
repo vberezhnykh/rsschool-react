@@ -52,6 +52,15 @@
       transform: scale(1);
       cursor: auto;
     }
+
+    .card__body,
+    .card__title {
+      -webkit-line-clamp: unset;
+    }
+
+    .card-tags {
+      display: flex;
+    }
   }
 }
 
@@ -71,6 +80,10 @@
   font-weight: bold;
   font-size: 2rem;
   margin-top: 0;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
 }
 
 .card__body {
@@ -84,9 +97,9 @@
 .card-tags {
   list-style: none;
   padding: 0;
-  display: flex;
   gap: 1rem;
   font-size: 1.2rem;
+  display: none;
 }
 
 .card-tag__item {
