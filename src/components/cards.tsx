@@ -3,9 +3,7 @@ import Card from './card';
 import { CardsProps } from '../types';
 
 const Cards: React.FC<CardsProps> = ({ posts }) => {
-  if (posts === null) {
-    return <div>Nothing has been loaded...</div>;
-  } else if (posts.posts.length === 0) {
+  if (posts === null || posts.posts.length === 0) {
     return <div className="cards__item--not-found">No results were found for your query...</div>;
   }
 

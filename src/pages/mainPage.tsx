@@ -10,7 +10,7 @@ const SERVER_URL = 'https://dummyjson.com/';
 const MainPage = () => {
   const [value, setValue] = useState(localStorage.getItem('search') ?? '');
   const [posts, setPosts] = useState<null | Posts>(null);
-  const [isLoading, setIsLoading] = useState<null | boolean>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,6 +41,7 @@ const MainPage = () => {
   }
 
   if (isLoading) return <Loader />;
+
   return (
     <>
       <Header page="Main Page"></Header>
