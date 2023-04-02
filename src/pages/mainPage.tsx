@@ -10,9 +10,10 @@ const SERVER_URL = 'https://dummyjson.com/';
 const MainPage = () => {
   const [value, setValue] = useState(localStorage.getItem('search') ?? '');
   const [posts, setPosts] = useState<null | Posts>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<null | boolean>(null);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       const data = await fetch(`${SERVER_URL}posts/search?q=${value}&limit=0`);
       if (data.ok && !ignore) {
@@ -21,7 +22,7 @@ const MainPage = () => {
         setTimeout(() => {
           setPosts(res);
           setIsLoading(false);
-        }, 700);
+        }, 400);
       }
     };
 
@@ -44,7 +45,7 @@ const MainPage = () => {
     <>
       <Header page="Main Page"></Header>
       <main className="main">
-        <SearchInput onKeyDown={handleKeyDown} />
+        <SearchInput onKeyDown={handleKeyDown} value={value} />
         <Cards posts={posts} />
       </main>
     </>
