@@ -9,6 +9,13 @@ export type Post = {
   userId: number;
 };
 
+export type CardProps = {
+  post: Post | null | undefined;
+  clickHandler: (e: React.MouseEvent, id: number) => void;
+  closeHandler?: (e: React.MouseEvent) => void;
+  isModal?: boolean;
+};
+
 export type Posts = {
   posts: Array<Post>;
   total: number;
@@ -17,12 +24,11 @@ export type Posts = {
 };
 
 export type CardsProps = {
-  value: string;
+  posts: null | Posts;
 };
 
 export type SearchInputProps = {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 export type HeaderProps = {
@@ -50,3 +56,18 @@ export type NewFormProps = {
   submitHandler: SubmitHandler<FormInputs>;
   formRef: React.RefObject<HTMLFormElement>;
 };
+
+export type Character = {
+  birth: string;
+  death: string;
+  gender: string;
+  hair: string;
+  height: string;
+  name: string;
+  race: string;
+  realm: string;
+  spouse: string;
+  _id: string;
+};
+
+export type MainPageCardsProps = { characters: Character[] | null };

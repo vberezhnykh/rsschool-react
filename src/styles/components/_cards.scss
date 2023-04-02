@@ -1,8 +1,24 @@
+.background-overlay {
+  background-color: black;
+  opacity: 0.3;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  &--visible {
+    display: block;
+  }
+}
+
 .cards {
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 
@@ -10,11 +26,44 @@
   border: 0.2rem solid $blue;
   border-radius: 1rem;
   padding: 1rem;
+  cursor: pointer;
+  
+  &:hover {
+    transform: scale(1.01);
+  }
 
   &--not-found {
     font-size: 2rem;
     text-align: center;
     margin-top: 2rem;
+  }
+
+  &--opened {
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;
+    background-color: $white;
+    z-index: 3;
+    list-style: none;
+
+    &:hover {
+      transform: scale(1);
+      cursor: auto;
+    }
+  }
+}
+
+.card__close-btn {
+  width: 3rem;
+  height: 3rem;
+  display: block;
+  margin-left: auto;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
   }
 }
 
@@ -26,7 +75,7 @@
 
 .card__body {
   font-size: 1.6rem;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   display: -webkit-box;
   overflow: hidden;

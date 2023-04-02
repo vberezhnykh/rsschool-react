@@ -1,9 +1,12 @@
 import React from 'react';
 import favoriteImg from '../assets/favorite.svg';
-import { Post } from '../types';
+import { CardProps } from '../types';
+import closeImgSrc from '../assets/close.svg';
 
-const Card: React.FC<Post> = (post) => {
-  function getTags(tags: string[]) {
+const Card: React.FC<CardProps> = ({ post, clickHandler, isModal, closeHandler }) => {
+  if (post == null) return null;
+
+  const getTags = (tags: string[]) => {
     return (
       <ul className="card-tags">
         {tags.map((tag, index) => (
@@ -13,10 +16,18 @@ const Card: React.FC<Post> = (post) => {
         ))}
       </ul>
     );
-  }
+  };
+
+  const handleClick = (e: React.MouseEvent) => clickHandler(e, post.id);
 
   return (
-    <li className="cards__item">
+    <li
+      className={`cards__item ${isModal ? 'cards__item--opened' : undefined}`}
+      onClick={handleClick}
+    >
+      {isModal ? (
+        <img src={closeImgSrc} alt="" className="card__close-btn" onClick={closeHandler} />
+      ) : null}
       <h3 className="card__title">{post.title}</h3>
       <p className="card__body">{post.body}</p>
       {getTags(post.tags)}
