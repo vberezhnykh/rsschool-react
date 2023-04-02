@@ -40,10 +40,9 @@
 
   &--opened {
     position: fixed;
-    width: 50%;
-    height: 50%;
-    top: 25%;
-    left: 25%;
+    width: 50rem;
+    top: 30%;
+    left: calc(50% - 25rem);
     background-color: $white;
     z-index: 3;
     list-style: none;
