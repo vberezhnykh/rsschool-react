@@ -3,12 +3,14 @@ import SearchInput from '../components/searchInput';
 import React, { useEffect, useState } from 'react';
 import { Posts } from '../types';
 import Cards from '../components/cards';
+import Loader from '../components/loader';
 
 const SERVER_URL = 'https://dummyjson.com/';
 
 const MainPage = () => {
   const [value, setValue] = useState(localStorage.getItem('search') ?? '');
   const [posts, setPosts] = useState<null | Posts>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,8 +18,10 @@ const MainPage = () => {
       if (data.ok && !ignore) {
         console.log('fetching data...');
         const res = await data.json();
-        console.log(res);
-        setPosts(res);
+        setTimeout(() => {
+          setPosts(res);
+          setIsLoading(false);
+        }, 700);
       }
     };
 
@@ -35,6 +39,7 @@ const MainPage = () => {
     }
   }
 
+  if (isLoading) return <Loader />;
   return (
     <>
       <Header page="Main Page"></Header>
