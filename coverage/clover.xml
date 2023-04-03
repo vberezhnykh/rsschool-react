@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1680263067316" clover="3.2.0">
-  <project timestamp="1680263067316" name="All files">
+<coverage generated="1680269012119" clover="3.2.0">
+  <project timestamp="1680269012120" name="All files">
     <metrics statements="508" coveredstatements="479" conditionals="72" coveredconditionals="66" methods="21" coveredmethods="19" elements="601" coveredelements="564" complexity="0" loc="508" ncloc="508" packages="3" files="11" classes="11"/>
     <package name="rsschool-react">
       <metrics statements="27" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
