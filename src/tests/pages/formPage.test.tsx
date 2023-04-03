@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import FormPage from '../pages/formPage';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
