@@ -16,6 +16,14 @@
     padding: 0.5rem 1rem;
     border-radius: 1rem;
     border: 0.1rem solid black;
+
+    &:focus {
+      outline-color: $blue;
+    }
+
+    &--invalid {
+      border-color: red;
+    }
   }
 }
 
@@ -44,6 +52,16 @@
 
   &:active::before {
     background-color: $light-blue;
+  }
+
+  &--invalid::before {
+      border-color: red;
+  }
+
+  &:focus {
+    outline-color: $blue;
+    border-radius: 1rem;
+    width: 19rem;
   }
 }
 

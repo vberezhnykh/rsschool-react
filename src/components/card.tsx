@@ -2,12 +2,8 @@ import React from 'react';
 import favoriteImg from '../assets/favorite.svg';
 import { Post } from '../types';
 
-class Card extends React.Component<Post> {
-  constructor(props: Post) {
-    super(props);
-  }
-
-  getTags(tags: string[]) {
+const Card: React.FC<Post> = (post) => {
+  function getTags(tags: string[]) {
     return (
       <ul className="card-tags">
         {tags.map((tag, index) => (
@@ -19,19 +15,17 @@ class Card extends React.Component<Post> {
     );
   }
 
-  render() {
-    return (
-      <li className="cards__item">
-        <h3 className="card__title">{this.props.title}</h3>
-        <p className="card__body">{this.props.body}</p>
-        {this.getTags(this.props.tags)}
-        <div className="card-reactions">
-          <img src={favoriteImg} alt="Favorite image." className="card-reactions__img" />
-          <span className="card-reactions__number">{this.props.reactions}</span>
-        </div>
-      </li>
-    );
-  }
-}
+  return (
+    <li className="cards__item">
+      <h3 className="card__title">{post.title}</h3>
+      <p className="card__body">{post.body}</p>
+      {getTags(post.tags)}
+      <div className="card-reactions">
+        <img src={favoriteImg} alt="Favorite image." className="card-reactions__img" />
+        <span className="card-reactions__number">{post.reactions}</span>
+      </div>
+    </li>
+  );
+};
 
 export default Card;

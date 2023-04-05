@@ -1,35 +1,30 @@
 import Cards from '../components/cards';
 import Header from '../components/header';
 import SearchInput from '../components/searchInput';
-import React from 'react';
-import { MainState } from '../types';
+import React, { useEffect, useState } from 'react';
 
-class MainPage extends React.Component<Record<string, never>, MainState> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = { value: localStorage.getItem('search') ?? '' };
-    this.handleInputChange = this.handleInputChange.bind(this);
+const MainPage = () => {
+  const [value, setValue] = useState(localStorage.getItem('search') ?? '');
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('search', value);
+    };
+  });
+
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setValue(event.target.value);
   }
 
-  handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ value: event.target.value });
-  }
-
-  componentWillUnmount(): void {
-    localStorage.setItem('search', this.state.value);
-  }
-
-  render() {
-    return (
-      <>
-        <Header page="Main Page"></Header>
-        <main className="main">
-          <SearchInput value={this.state.value} onChange={this.handleInputChange} />
-          <Cards value={this.state.value} />
-        </main>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Header page="Main Page"></Header>
+      <main className="main">
+        <SearchInput value={value} onChange={handleInputChange} />
+        <Cards value={value} />
+      </main>
+    </>
+  );
+};
 
 export default MainPage;
