@@ -6,6 +6,7 @@ import MainPage from '../pages/mainPage';
 import AboutPage from '../pages/aboutPage';
 import ErrorPage from '../pages/errorPage';
 import { mockServer } from './setup';
+import FormPage from '../pages/formPage';
 
 beforeAll(() => {
   mockServer.listen({ onUnhandledRequest: 'error' });
@@ -23,6 +24,7 @@ describe('App', () => {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/form" element={<FormPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </MemoryRouter>
@@ -48,6 +50,10 @@ describe('App', () => {
       screen.getByText('This app is created by Valentin Berezhnykh in 2023.')
     ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'About' })).toHaveAttribute('aria-current', 'page');
+
+    await user.click(screen.getByRole('link', { name: 'Form' }));
+    expect(screen.getByRole('link', { name: 'Form' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByText('Nothing has been sumbitted yet.')).toBeInTheDocument();
   });
 
   it('renders 404 page', () => {
