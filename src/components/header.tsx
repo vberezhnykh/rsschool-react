@@ -19,6 +19,12 @@ class Header extends React.Component<HeaderProps> {
               Main
             </NavLink>
             <NavLink
+              to={'/form'}
+              className={({ isActive }) => (isActive ? 'nav-list__item--active' : undefined)}
+            >
+              Form
+            </NavLink>
+            <NavLink
               to={'/about'}
               className={({ isActive }) => (isActive ? 'nav-list__item--active' : undefined)}
             >

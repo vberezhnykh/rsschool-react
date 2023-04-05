@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Header from '../components/header';
 import { BrowserRouter } from 'react-router-dom';
-import About from '../pages/aboutPage';
+import AboutPage from '../pages/aboutPage';
 
 describe('About Page', () => {
   it('renders Header component', () => {
@@ -16,7 +16,7 @@ describe('About Page', () => {
   it('renders about text', () => {
     render(
       <BrowserRouter>
-        <About />
+        <AboutPage />
       </BrowserRouter>
     );
     expect(screen.getByText(/This app is created by Valentin Berezhnykh in 2023./i));
@@ -25,7 +25,7 @@ describe('About Page', () => {
   it('renders links', () => {
     render(
       <BrowserRouter>
-        <About />
+        <AboutPage />
       </BrowserRouter>
     );
 

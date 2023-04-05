@@ -1,0 +1,9 @@
+@mixin error-message {
+  color: red;
+  font-weight: bold;
+  visibility: hidden;
+
+  &--visible {
+    visibility: visible;
+  }
+}

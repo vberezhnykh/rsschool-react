@@ -1,10 +1,10 @@
 import Cards from '../components/cards';
 import Header from '../components/header';
-import SearchInput from '../components/input';
+import SearchInput from '../components/searchInput';
 import React from 'react';
 import { MainState } from '../types';
 
-class Main extends React.Component<Record<string, never>, MainState> {
+class MainPage extends React.Component<Record<string, never>, MainState> {
   constructor(props: Record<string, never>) {
     super(props);
     this.state = { value: localStorage.getItem('search') ?? '' };
@@ -32,4 +32,4 @@ class Main extends React.Component<Record<string, never>, MainState> {
   }
 }
 
-export default Main;
+export default MainPage;

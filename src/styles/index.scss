@@ -1,8 +1,11 @@
 @import './abstracts/variables';
+@import './abstracts/mixines';
 @import './base/typography';
 @import './base/base';
 @import './components/cards';
 @import './components/searchInput';
+@import './components/form';
+@import './components/formCards';
 @import './layout/header';
 @import './layout/main';
 @import './pages/about';

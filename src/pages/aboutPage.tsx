@@ -2,7 +2,7 @@ import Header from '../components/header';
 import rsSchoolLogo from '../assets/rs_school.svg';
 import gitHubLogo from '../assets/github-logo.svg';
 
-const About = () => {
+const AboutPage = () => {
   return (
     <>
       <Header page="About Page" />
@@ -31,4 +31,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutPage;

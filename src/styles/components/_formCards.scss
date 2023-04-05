@@ -1,0 +1,68 @@
+.form-cards--not-found {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.form-cards {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 35rem;
+  gap: 2rem;
+}
+
+.form-cards__item {
+  padding: 1rem;
+  border: 0.2rem solid $blue;
+  border-radius: calc(1rem + 1.5rem);
+  display: flex;
+  flex-direction: column;
+  font-size: 1.4rem;
+}
+
+.form-cards__close-img {
+  display: block;
+  width: 3.2rem;
+  height: 3.2rem;
+  align-self: flex-end;
+  cursor: pointer;
+  margin-bottom: 1rem;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.card-info-image-container {
+  display: flex;
+}
+
+.card-info-container {
+  width: 50%;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.form-cards__name {
+  margin-top: 0;
+}
+
+.consent-list {
+  padding-left: 2rem;
+
+  span {
+    margin-left: -2rem;
+  }
+  
+}
+
+.form-cards__image {
+  border: 0.1rem solid $blue;
+  border-radius: calc(1rem + 1.5rem + 1rem);
+  width: 50%;
+  height: 28rem;
+  object-fit: cover;
+}

@@ -1,0 +1,117 @@
+.form {
+  border: 0.2rem solid $blue;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  row-gap: 1.5rem;
+  font-size: 2rem;
+  border-radius: calc(1rem + 1.5rem);
+  margin-bottom: 2rem;
+
+  &__name-input,
+  &__surname-input,
+  &__date-input,
+  &__residence-input {
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: 0.1rem solid black;
+  }
+}
+
+.file-label {
+  display: flex;
+}
+
+.form__file-input {
+  width: 19rem;
+
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+  &::before {
+    content: 'Select profile photo';
+    display: inline-block;
+    border: 0.1rem solid $blue;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 2rem;
+  }
+
+  &:active::before {
+    background-color: $light-blue;
+  }
+}
+
+.name-error,
+.surname-error,
+.date-of-birth-error,
+.residence-error,
+.file-error,
+.switcher-error {
+  @include error-message;
+}
+
+.consent-container {
+  grid-column-start: 1;
+  grid-column-end: -1;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.consent-heading {
+  font-weight: bold;
+  width: 100%;
+}
+
+.consent-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  input {
+    margin: 0;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+}
+
+.sex-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.switcher {
+  position: relative;
+  display: inline-flex;
+  width: 4rem;
+  justify-content: space-between;
+}
+
+.form__submit-btn {
+  display: block;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  border: 0.1rem solid $light-blue;
+  background-color: $light-blue;
+  color: $white;
+  cursor: pointer;
+  grid-column-start: 1;
+  grid-column-end: -1;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

@@ -1,14 +1,6 @@
 import React from 'react';
 import favoriteImg from '../assets/favorite.svg';
-
-type Post = {
-  body: string;
-  id: number;
-  reactions: number;
-  tags: string[];
-  title: string;
-  userId: number;
-};
+import { Post } from '../types';
 
 class Card extends React.Component<Post> {
   constructor(props: Post) {
