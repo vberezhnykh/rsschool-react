@@ -28,12 +28,12 @@ const MainPage = () => {
     fetchData();
     return () => {
       ignore = true;
-      localStorage.setItem('search', value);
     };
   }, [value]);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Enter') {
+      localStorage.setItem('search', event.currentTarget.value);
       setValue(event.currentTarget.value);
     }
   }
