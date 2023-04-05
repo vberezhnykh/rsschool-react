@@ -16,7 +16,7 @@ describe('Main Page', () => {
   it('renders SearchInput component', () => {
     render(
       <BrowserRouter>
-        <SearchInput value="" onChange={() => {}} />
+        <SearchInput value="" onKeyDown={() => {}} />
       </BrowserRouter>
     );
     expect(screen.getByRole('img')).toBeInTheDocument();
