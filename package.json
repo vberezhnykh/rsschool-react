@@ -11,7 +11,7 @@
     "check-types": "tsc --noEmit",
     "eslint": "eslint --fix . --ext .ts --ext .js --ext .tsx",
     "lint": "npm run eslint && npm run check-types",
-    "test": "vitest",
+    "test": "vitest && vitest run --coverage",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
