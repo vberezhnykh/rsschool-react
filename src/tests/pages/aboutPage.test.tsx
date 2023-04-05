@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Header from '../components/header';
+import Header from '../../components/header';
 import { BrowserRouter } from 'react-router-dom';
-import AboutPage from '../pages/aboutPage';
+import AboutPage from '../../pages/aboutPage';
 
 describe('About Page', () => {
   it('renders Header component', () => {

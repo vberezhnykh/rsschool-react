@@ -19,10 +19,8 @@ const MainPage = () => {
       if (data.ok && !ignore) {
         console.log('fetching data...');
         const res = await data.json();
-        setTimeout(() => {
-          setPosts(res);
-          setIsLoading(false);
-        }, 400);
+        setPosts(res);
+        setIsLoading(false);
       }
     };
 

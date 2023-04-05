@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import FormCards from '../components/formCards';
+import FormCards from '../../components/formCards';
 
 describe('FormCards', () => {
   it('renders correctly if there is no cards', () => {

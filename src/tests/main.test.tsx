@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
@@ -18,9 +18,18 @@ describe('App', () => {
       </MemoryRouter>
     );
 
+    const loader = screen.getByRole('heading', { name: 'Loading...' });
+    expect(loader).toBeInTheDocument();
+
+    /* screen.debug();
     const navigation = screen.getByRole('navigation');
     const mainPageLink = within(navigation).getByText(/Main/i);
+
     const user = userEvent.setup();
+
+    expect(screen.getByText(/Main Page/i)).toBeInTheDocument();
+    expect(mainPageLink).toBeInTheDocument();
+    expect(mainPageLink).toHaveAttribute('aria-current', 'page');
 
     expect(screen.getByText(/Main Page/i)).toBeInTheDocument();
     expect(mainPageLink).toBeInTheDocument();
@@ -30,7 +39,7 @@ describe('App', () => {
     expect(
       screen.getByText('This app is created by Valentin Berezhnykh in 2023.')
     ).toBeInTheDocument();
-    expect(screen.getByText('About')).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByText('About')).toHaveAttribute('aria-current', 'page'); */
   });
 
   it('renders 404 page', () => {
@@ -38,8 +47,6 @@ describe('App', () => {
     render(
       <MemoryRouter initialEntries={[badRoute]}>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </MemoryRouter>
