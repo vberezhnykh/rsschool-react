@@ -7,6 +7,7 @@ import AboutPage from '../pages/aboutPage';
 import ErrorPage from '../pages/errorPage';
 import { mockServer } from './setup';
 import FormPage from '../pages/formPage';
+import { renderWithProviders } from '../utlis/test-utils';
 
 beforeAll(() => {
   mockServer.listen({ onUnhandledRequest: 'error' });
@@ -19,7 +20,7 @@ afterEach(() => {
 
 describe('App', () => {
   it('renders with all routes ', async () => {
-    render(
+    renderWithProviders(
       <MemoryRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />

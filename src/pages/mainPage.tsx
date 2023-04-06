@@ -4,18 +4,22 @@ import React, { useEffect, useState } from 'react';
 import { Posts } from '../types';
 import Cards from '../components/cards';
 import Loader from '../components/loader';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { save } from '../store/store';
 
 const SERVER_URL = 'https://dummyjson.com/';
 
 const MainPage = () => {
-  const [value, setValue] = useState(localStorage.getItem('search') ?? '');
   const [posts, setPosts] = useState<null | Posts>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const searchValue = useAppSelector((state) => state.search.searchValue);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
-      const data = await fetch(`${SERVER_URL}posts/search?q=${value}&limit=0`);
+      const data = await fetch(`${SERVER_URL}posts/search?q=${searchValue}&limit=0`);
       if (data.ok) {
         console.log('fetching data...');
         const res = await data.json();
@@ -25,12 +29,11 @@ const MainPage = () => {
     };
 
     fetchData();
-  }, [value]);
+  }, [searchValue]);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Enter') {
-      localStorage.setItem('search', event.currentTarget.value);
-      setValue(event.currentTarget.value);
+      dispatch(save(event.currentTarget.value));
     }
   }
 
@@ -40,7 +43,7 @@ const MainPage = () => {
     <>
       <Header page="Main Page"></Header>
       <main className="main">
-        <SearchInput onKeyDown={handleKeyDown} value={value} />
+        <SearchInput onKeyDown={handleKeyDown} />
         <Cards posts={posts} />
       </main>
     </>

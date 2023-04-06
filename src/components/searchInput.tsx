@@ -1,8 +1,11 @@
 import React from 'react';
 import searchImg from '../assets/search.svg';
 import { SearchInputProps } from '../types';
+import { useAppSelector } from '../store/hooks';
 
-const SearchInput: React.FC<SearchInputProps> = ({ onKeyDown, value }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ onKeyDown }) => {
+  const searchValue = useAppSelector((state) => state.search.searchValue);
+
   return (
     <div className="search-container">
       <img src={searchImg} alt="Image of a magnifying glass." className="search__img" />
@@ -11,7 +14,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ onKeyDown, value }) => {
         onKeyDown={onKeyDown}
         className="search__input"
         placeholder="Type here..."
-        defaultValue={value}
+        defaultValue={searchValue}
       />
     </div>
   );
