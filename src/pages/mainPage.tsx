@@ -16,7 +16,7 @@ const MainPage = () => {
     setIsLoading(true);
     const fetchData = async () => {
       const data = await fetch(`${SERVER_URL}posts/search?q=${value}&limit=0`);
-      if (data.ok && !ignore) {
+      if (data.ok) {
         console.log('fetching data...');
         const res = await data.json();
         setPosts(res);
@@ -24,11 +24,7 @@ const MainPage = () => {
       }
     };
 
-    let ignore = false;
     fetchData();
-    return () => {
-      ignore = true;
-    };
   }, [value]);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {

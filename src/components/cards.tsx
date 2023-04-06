@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Card from './card';
-import { CardsProps } from '../types';
+import { CardsProps, Post } from '../types';
+import { getPostById } from '../utlis/api';
+import Loader from './loader';
 
 const Cards: React.FC<CardsProps> = ({ posts }) => {
   if (posts === null || posts.posts.length === 0) {
@@ -8,27 +10,33 @@ const Cards: React.FC<CardsProps> = ({ posts }) => {
   }
 
   const [isOpened, setIsOpened] = useState(false);
-  const [postId, setPostId] = useState<null | number>(null);
+  const [modalPost, setModalPost] = useState<null | Post>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const overlayClickHandler = () => {
     setIsOpened(!isOpened);
-    setPostId(null);
+    setModalPost(null);
     document.body.style.overflowY = 'auto';
   };
 
-  const cardClickHandler = (e: React.MouseEvent, id: number) => {
+  const cardClickHandler = async (e: React.MouseEvent, id: number) => {
     if (!isOpened) {
       setIsOpened(true);
-      setPostId(id);
+      setIsLoading(true);
+      const post = await getPostById(id);
+      setIsLoading(false);
+      setModalPost(post);
       document.body.style.overflowY = 'hidden';
-    } else setPostId(null);
+    } else setModalPost(null);
   };
 
   const cardCloseHandler = () => {
     setIsOpened(false);
-    setPostId(null);
+    setModalPost(null);
     document.body.style.overflowY = 'auto';
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div>
@@ -38,7 +46,7 @@ const Cards: React.FC<CardsProps> = ({ posts }) => {
       ></div>
       <Card
         isModal={true}
-        post={postId !== null ? posts.posts.find((post) => post.id === postId) : null}
+        post={modalPost}
         clickHandler={() => {}}
         closeHandler={cardCloseHandler}
       />
