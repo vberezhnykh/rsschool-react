@@ -18,7 +18,10 @@ const Card: React.FC<CardProps> = ({ post, clickHandler, isModal, closeHandler }
     );
   };
 
-  const handleClick = (e: React.MouseEvent) => clickHandler(e, post.id);
+  const handleClick = (e: React.MouseEvent) => {
+    if (!clickHandler) return;
+    clickHandler(e, post.id);
+  };
 
   return (
     <li

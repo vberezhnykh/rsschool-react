@@ -47,12 +47,7 @@ const Cards: React.FC<CardsProps> = ({ posts }) => {
         className={`background-overlay ${isOpened ? 'background-overlay--visible' : undefined}`}
         onClick={overlayClickHandler}
       ></div>
-      <Card
-        isModal={true}
-        post={modalPost}
-        clickHandler={() => {}}
-        closeHandler={cardCloseHandler}
-      />
+      <Card isModal={true} post={modalPost} closeHandler={cardCloseHandler} />
       <ul className="cards" data-testid="cards-list">
         {...posts.posts.map((post) => (
           <Card key={post.id} post={post} clickHandler={cardClickHandler} />
