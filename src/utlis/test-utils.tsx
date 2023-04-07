@@ -5,7 +5,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
-import { store, RootState, searchReducer } from '../store/store';
+import { store, RootState } from '../store/store';
+import { searchReducer } from '../store/features/searchReducer';
+import { modalReducer } from '../store/features/modalReducer';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -15,8 +17,11 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 export function renderWithProviders(
   ui: React.ReactElement,
   {
-    preloadedState = { search: { value: '' } },
-    store = configureStore({ reducer: { search: searchReducer }, preloadedState }),
+    preloadedState = { search: { value: '', posts: null }, modal: { post: null, isOpened: false } },
+    store = configureStore({
+      reducer: { search: searchReducer, modal: modalReducer },
+      preloadedState,
+    }),
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {

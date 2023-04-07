@@ -1,24 +1,11 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-
-const searchSlice = createSlice({
-  name: 'search',
-  initialState: {
-    value: '',
-  },
-  reducers: {
-    save(state, action) {
-      state.value = action.payload;
-    },
-  },
-});
-
-export const searchReducer = searchSlice.reducer;
-
-export const { save } = searchSlice.actions;
+import { configureStore } from '@reduxjs/toolkit';
+import { searchReducer } from './features/searchReducer';
+import { modalReducer } from './features/modalReducer';
 
 export const store = configureStore({
   reducer: {
     search: searchReducer,
+    modal: modalReducer,
   },
 });
 
