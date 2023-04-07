@@ -13,7 +13,7 @@ const MainPage = () => {
   const [posts, setPosts] = useState<null | Posts>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const searchValue = useAppSelector((state) => state.search.searchValue);
+  const searchValue = useAppSelector((state) => state.search.value);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

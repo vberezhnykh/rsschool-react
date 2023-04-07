@@ -15,7 +15,7 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 export function renderWithProviders(
   ui: React.ReactElement,
   {
-    preloadedState = { search: { searchValue: '' } },
+    preloadedState = { search: { value: '' } },
     store = configureStore({ reducer: { search: searchReducer }, preloadedState }),
     ...renderOptions
   }: ExtendedRenderOptions = {}

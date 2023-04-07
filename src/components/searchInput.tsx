@@ -4,7 +4,7 @@ import { SearchInputProps } from '../types';
 import { useAppSelector } from '../store/hooks';
 
 const SearchInput: React.FC<SearchInputProps> = ({ onKeyDown }) => {
-  const searchValue = useAppSelector((state) => state.search.searchValue);
+  const searchValue = useAppSelector((state) => state.search.value);
 
   return (
     <div className="search-container">
