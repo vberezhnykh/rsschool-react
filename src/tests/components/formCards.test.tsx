@@ -1,10 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import FormCards from '../../components/formCards';
+import { renderWithProviders } from '../../utlis/test-utils';
 
 describe('FormCards', () => {
   it('renders correctly if there is no cards', () => {
-    render(<FormCards cards={[]} clickHandler={() => {}} />);
+    renderWithProviders(<FormCards cards={[]} />);
     expect(screen.getByText('Nothing has been sumbitted yet.')).toBeInTheDocument();
   });
 
@@ -18,11 +19,13 @@ describe('FormCards', () => {
         fileUrl: 'fakepath',
         sex: 'Male',
         consents: ['name', 'surname'],
+        id: '1',
       },
     ];
-    render(<FormCards cards={cards} clickHandler={() => {}} />);
+    renderWithProviders(<FormCards cards={cards} />);
     const image = screen.getByAltText(`Image of ${cards[0].name} ${cards[0].surname}`);
-    const FORM_INPUTS_LENGTH = Object.keys(cards[0]).length - 1;
+    const INPUTS_WITHOUT_CHECKBOX = 2;
+    const FORM_INPUTS_LENGTH = Object.keys(cards[0]).length - INPUTS_WITHOUT_CHECKBOX;
 
     expect(screen.getByText(cards[0].name)).toBeInTheDocument();
     expect(screen.getByText(cards[0].surname)).toBeInTheDocument();

@@ -1,32 +1,21 @@
 import Header from '../components/header';
 import Form from '../components/form';
 import { SubmitHandler } from 'react-hook-form';
-import { useEffect, useState } from 'react';
 import React from 'react';
 import FormCards from '../components/formCards';
-import { FormInputs, FormCardData } from '../types';
+import { FormInputs } from '../types';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { saveCard } from '../store/features/formReducer';
+import { v4 as uuidv4 } from 'uuid';
 
 const FormPage = () => {
   const formRef = React.createRef<HTMLFormElement>();
-  const cardsInLocalStorage = localStorage.getItem('cards');
-  const [cards, setCards] = useState<FormCardData[]>(
-    cardsInLocalStorage ? JSON.parse(cardsInLocalStorage) : []
-  );
-
-  const saveCardsToLocalStorage = () => localStorage.setItem('cards', JSON.stringify(cards));
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', saveCardsToLocalStorage);
-    return () => {
-      saveCardsToLocalStorage();
-      window.removeEventListener('beforeunload', saveCardsToLocalStorage);
-    };
-  });
+  const cards = useAppSelector((state) => state.form.cards);
+  const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    setCards([
-      ...cards,
-      {
+    dispatch(
+      saveCard({
         name: data.name,
         surname: data.surname,
         dateOfBirth: data.dateOfBirth,
@@ -34,13 +23,10 @@ const FormPage = () => {
         residence: data.residence,
         sex: data.sex,
         consents: data.consents,
-      },
-    ]);
+        id: uuidv4(),
+      })
+    );
     formRef.current?.reset();
-  };
-
-  const handleCardClose = (card: FormCardData): void => {
-    setCards(cards.filter((cardEl) => cardEl !== card));
   };
 
   return (
@@ -48,7 +34,7 @@ const FormPage = () => {
       <Header page="Form Page" />
       <main className="main">
         <Form submitHandler={onSubmit} formRef={formRef} />
-        <FormCards cards={cards} clickHandler={handleCardClose} />
+        <FormCards cards={cards} />
       </main>
     </>
   );

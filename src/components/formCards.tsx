@@ -1,16 +1,20 @@
 import closeImgSrc from '../assets/close.svg';
 import { NewFormCardsProps } from '../types';
+import { useAppDispatch } from '../store/hooks';
+import { removeCard } from '../store/features/formReducer';
 
-const FormCards: React.FC<NewFormCardsProps> = ({ cards, clickHandler }) => {
+const FormCards: React.FC<NewFormCardsProps> = ({ cards }) => {
   if (cards.length === 0)
     return <div className="form-cards--not-found">Nothing has been sumbitted yet.</div>;
+
+  const dispatch = useAppDispatch();
   const listItems = cards.map((card, index) => (
     <li key={`form-card-${index}`} className="form-cards__item">
       <img
         src={closeImgSrc}
         alt="Cross"
         className="form-cards__close-img"
-        onClick={() => clickHandler(cards[index])}
+        onClick={() => dispatch(removeCard({ id: card.id }))}
       />
       <div className="card-info-image-container">
         <div className="card-info-container">
