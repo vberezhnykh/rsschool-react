@@ -8,7 +8,7 @@ import { rest } from 'msw';
 expect.extend(matchers);
 
 const restHandlers = [
-  rest.get('https://dummyjson.com/posts/search?q=', (req, res, ctx) => {
+  rest.get('https://dummyjson.com/posts/search', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(MockPosts));
   }),
 ];
