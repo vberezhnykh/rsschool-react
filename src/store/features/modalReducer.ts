@@ -1,29 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Post } from '../../types';
 
 type ModalState = {
-  post: Post | null;
   isOpened: boolean;
+  id: number;
 };
 
 const initialState: ModalState = {
-  post: null,
   isOpened: false,
+  id: 1,
 };
 
 const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    saveModalPost(state, action) {
-      state.post = action.payload;
-    },
     toggleIsOpened(state) {
       state.isOpened = !state.isOpened;
+    },
+    saveId(state, action) {
+      state.id = action.payload.id;
     },
   },
 });
 
 export const modalReducer = modalSlice.reducer;
 
-export const { saveModalPost, toggleIsOpened } = modalSlice.actions;
+export const { toggleIsOpened, saveId } = modalSlice.actions;

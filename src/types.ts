@@ -24,7 +24,7 @@ export type Posts = {
 };
 
 export type CardsProps = {
-  posts: null | Posts;
+  posts?: Posts;
 };
 
 export type SearchInputProps = {
