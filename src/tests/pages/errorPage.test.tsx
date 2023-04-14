@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Header from '../components/header';
+import Header from '../../components/header';
 import { BrowserRouter } from 'react-router-dom';
-import ErrorPage from '../pages/errorPage';
+import ErrorPage from '../../pages/errorPage';
 
 describe('Error Page', () => {
   it('renders Header component', () => {
