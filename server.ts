@@ -17,20 +17,10 @@ async function createServer() {
 
   app.use('*', async (req, res) => {
     const url = req.originalUrl;
-
     try {
       console.log('trying...');
-      let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8');
-
-      template = await vite.transformIndexHtml(url, template);
-
       const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
-
-      const appHtml = await render(url);
-
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
-
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      await render(url, { req, res });
     } catch (err) {
       if (err instanceof Error) vite.ssrFixStacktrace(err);
       console.log(err);
