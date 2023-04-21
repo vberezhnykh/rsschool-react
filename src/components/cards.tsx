@@ -1,42 +1,39 @@
-import { useState } from 'react';
 import Card from './card';
-import { CardsProps, Post } from '../types';
-import { getPostById } from '../utlis/api';
+import { CardsProps } from '../types';
 import Loader from './loader';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { toggleIsOpened, saveId } from '../store/features/modalReducer';
+import { useGetPostQuery } from '../store/features/apiSlice';
 
 const Cards: React.FC<CardsProps> = ({ posts }) => {
-  if (posts === null || posts.posts.length === 0) {
+  if (posts == null || posts.posts.length === 0) {
     return <div className="cards__item--not-found">No results were found for your query...</div>;
   }
 
-  const [isOpened, setIsOpened] = useState(false);
-  const [modalPost, setModalPost] = useState<null | Post>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const isOpened = useAppSelector((state) => state.modal.isOpened);
+  const id = useAppSelector((state) => state.modal.id);
+  const { data: post, isFetching } = useGetPostQuery(id);
+  const dispatch = useAppDispatch();
 
   const overlayClickHandler = () => {
-    setIsOpened(!isOpened);
-    setModalPost(null);
+    dispatch(toggleIsOpened());
     document.body.style.overflowY = 'auto';
   };
 
-  const cardClickHandler = async (e: React.MouseEvent, id: number) => {
-    if (!isOpened) {
-      setIsOpened(true);
-      setIsLoading(true);
-      const post = await getPostById(id);
-      setIsLoading(false);
-      setModalPost(post);
+  const cardClickHandler = (e: React.MouseEvent, id: number) => {
+    if (!isOpened && post !== undefined) {
+      dispatch(toggleIsOpened());
+      dispatch(saveId({ id }));
       document.body.style.overflowY = 'hidden';
-    } else setModalPost(null);
+    }
   };
 
   const cardCloseHandler = () => {
-    setIsOpened(false);
-    setModalPost(null);
+    dispatch(toggleIsOpened());
     document.body.style.overflowY = 'auto';
   };
 
-  if (isLoading) return <Loader />;
+  if (isFetching) return <Loader />;
 
   return (
     <div>
@@ -44,12 +41,7 @@ const Cards: React.FC<CardsProps> = ({ posts }) => {
         className={`background-overlay ${isOpened ? 'background-overlay--visible' : undefined}`}
         onClick={overlayClickHandler}
       ></div>
-      <Card
-        isModal={true}
-        post={modalPost}
-        clickHandler={() => {}}
-        closeHandler={cardCloseHandler}
-      />
+      <Card isModal={true} post={isOpened ? post : null} closeHandler={cardCloseHandler} />
       <ul className="cards" data-testid="cards-list">
         {...posts.posts.map((post) => (
           <Card key={post.id} post={post} clickHandler={cardClickHandler} />

@@ -1,12 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import FormPage from '../../pages/formPage';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { renderWithProviders } from '../../utlis/test-utils';
 
 describe('FormPage', () => {
   it('renders correctly if nothing has been submitted', () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -16,7 +17,7 @@ describe('FormPage', () => {
   });
 
   it('shows error messages if the inputs are empty', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -42,7 +43,7 @@ describe('FormPage', () => {
   });
 
   it('does not show an error if a valid name is entered', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -59,7 +60,7 @@ describe('FormPage', () => {
   });
 
   it('shows an error if the invalid name is entered', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -74,7 +75,7 @@ describe('FormPage', () => {
   });
 
   it('does not show an error if a valid surname is entered', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -91,7 +92,7 @@ describe('FormPage', () => {
   });
 
   it('shows an error if the invalid surname is entered', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -106,7 +107,7 @@ describe('FormPage', () => {
   });
 
   it('does not show an error if a valid date of birth is entered', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -122,7 +123,7 @@ describe('FormPage', () => {
   });
 
   it('does not show an error if a photo is uploaded', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -138,7 +139,7 @@ describe('FormPage', () => {
   });
 
   it('does not show an error if a residence is selected', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -154,7 +155,7 @@ describe('FormPage', () => {
   });
 
   it('does not show an error if a sex is selected', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -171,7 +172,7 @@ describe('FormPage', () => {
   });
 
   it('select checkboxes', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>
@@ -186,7 +187,7 @@ describe('FormPage', () => {
   });
 
   it('correctly create card', async () => {
-    render(
+    renderWithProviders(
       <BrowserRouter>
         <FormPage />
       </BrowserRouter>

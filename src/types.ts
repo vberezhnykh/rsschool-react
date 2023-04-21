@@ -11,7 +11,7 @@ export type Post = {
 
 export type CardProps = {
   post: Post | null | undefined;
-  clickHandler: (e: React.MouseEvent, id: number) => void;
+  clickHandler?: (e: React.MouseEvent, id: number) => void;
   closeHandler?: (e: React.MouseEvent) => void;
   isModal?: boolean;
 };
@@ -24,12 +24,11 @@ export type Posts = {
 };
 
 export type CardsProps = {
-  posts: null | Posts;
+  posts?: Posts;
 };
 
 export type SearchInputProps = {
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  value: string;
 };
 
 export type HeaderProps = {
@@ -44,13 +43,13 @@ export type FormInputs = {
   residence: string;
   sex: string;
   consents: string[];
+  id: string;
 };
 
 export type FormCardData = Omit<FormInputs, 'file'> & { fileUrl: string };
 
 export type NewFormCardsProps = {
   cards: Array<FormCardData>;
-  clickHandler: (card: FormCardData) => void;
 };
 
 export type NewFormProps = {
