@@ -5,12 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { Request, Response } from 'express';
 
-type Options = {
-  req: Request;
-  res: Response;
-};
-
-export function render(url: string | Partial<Location>, opts: Options) {
+export function render(url: string | Partial<Location>, opts: { req: Request; res: Response }) {
   const { pipe } = renderToPipeableStream(
     <Provider store={store}>
       <StaticRouter location={url}>

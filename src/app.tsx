@@ -18,9 +18,10 @@ export default function App() {
       <body>
         <div>
           <Routes>
-            <Route path="/" element={<MainPage />} errorElement={<ErrorPage />} />
+            <Route path="/" element={<MainPage />} />
             <Route path="/form" element={<FormPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>
       </body>
