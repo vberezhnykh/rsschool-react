@@ -29,6 +29,7 @@ export type CardsProps = {
 
 export type SearchInputProps = {
   onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  searchValue: string;
 };
 
 export type HeaderProps = {

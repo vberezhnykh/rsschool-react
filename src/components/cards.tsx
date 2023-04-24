@@ -1,17 +1,28 @@
 import Card from './card';
-import { CardsProps, Post } from '../types/types';
+import { Post } from '../types/types';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { toggleIsOpened, saveId } from '../store/features/modalReducer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Loader from './loader';
+import { useGetPostsQuery } from '../store/features/apiSlice';
 
-const Cards: React.FC<CardsProps> = ({ posts }) => {
-  if (posts == null || posts.posts.length === 0) {
-    return <div className="cards__item--not-found">No results were found for your query...</div>;
-  }
-
+const Cards = () => {
+  const searchValue = useAppSelector((state) => state.search.value);
+  const [inputValue, setInputValue] = useState('');
+  const { data: posts, isFetching } = useGetPostsQuery(inputValue);
   const isOpened = useAppSelector((state) => state.modal.isOpened);
   const [post, setPost] = useState<null | Post>(null);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setInputValue(searchValue);
+  }, [searchValue]);
+
+  if (isFetching) return <Loader />;
+
+  if (posts == null || posts.posts.length === 0) {
+    return <div className="cards__item--not-found">No results were found for your query...</div>;
+  }
 
   const overlayClickHandler = () => {
     dispatch(toggleIsOpened());

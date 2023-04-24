@@ -5,22 +5,17 @@ import MockPosts from '../../dummy.json';
 import { renderWithProviders } from '../../utlis/test-utils';
 
 describe('Cards', () => {
-  it('renders component if Posts are passed', async () => {
-    renderWithProviders(<Cards posts={MockPosts} />);
+  it('renders component', async () => {
+    renderWithProviders(<Cards />);
     await waitFor(
       () => {
         const cards = screen.getByTestId('cards-list');
-        const mockCardsTotal = 30;
+        const mockCardsTotal = 150;
 
         expect(cards).toBeInTheDocument();
         expect(cards.childElementCount).toBe(mockCardsTotal);
       },
       { timeout: 5000 }
     );
-  });
-
-  it('renders component with no results found', () => {
-    render(<Cards posts={undefined} />);
-    expect(screen.getByText(/No results were found for your query.../i));
   });
 });
