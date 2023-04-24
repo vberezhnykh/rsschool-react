@@ -55,10 +55,7 @@ export async function render(url: string | Partial<Location>, res: Response) {
       preloadedState={initialState}
     />,
     {
-      //bootstrapModules: ['./src/entry-client.tsx'],
       onShellReady() {
-        /* res.setHeader('content-type', 'text/html');
-        res.statusCode = 200; */
         pipe(res);
       },
     }
