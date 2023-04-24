@@ -1,5 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { FormCardData } from '../../types';
+// import { createSlice } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+export type TypeToolkitRaw = typeof toolkitRaw & { default?: unknown };
+const { createSlice } = ((toolkitRaw as TypeToolkitRaw).default ?? toolkitRaw) as typeof toolkitRaw;
+import { FormCardData } from '../../types/types';
 
 type FormState = {
   cards: FormCardData[];

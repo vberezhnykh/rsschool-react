@@ -1,5 +1,5 @@
 import closeImgSrc from '../assets/close.svg';
-import { NewFormCardsProps } from '../types';
+import { NewFormCardsProps } from '../types/types';
 import { useAppDispatch } from '../store/hooks';
 import { removeCard } from '../store/features/formReducer';
 

@@ -16,7 +16,7 @@ async function createServer() {
     try {
       console.log('trying...');
       const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
-      await render(url, { req, res });
+      await render(url, res);
     } catch (err) {
       if (err instanceof Error) vite.ssrFixStacktrace(err);
       console.log(err);

@@ -1,14 +1,13 @@
-import { Posts } from '../../types';
-import { createSlice } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+export type TypeToolkitRaw = typeof toolkitRaw & { default?: unknown };
+const { createSlice } = ((toolkitRaw as TypeToolkitRaw).default ?? toolkitRaw) as typeof toolkitRaw;
 
 type SearchState = {
   value: string;
-  posts: Posts | null;
 };
 
 const initialState: SearchState = {
   value: '',
-  posts: null,
 };
 
 const searchSlice = createSlice({
@@ -18,12 +17,9 @@ const searchSlice = createSlice({
     saveValue(state, action) {
       state.value = action.payload;
     },
-    savePosts(state, action) {
-      state.posts = action.payload;
-    },
   },
 });
 
 export const searchReducer = searchSlice.reducer;
 
-export const { saveValue, savePosts } = searchSlice.actions;
+export const { saveValue } = searchSlice.actions;

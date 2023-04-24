@@ -1,6 +1,6 @@
 import React from 'react';
 import searchImg from '../assets/search.svg';
-import { SearchInputProps } from '../types';
+import { SearchInputProps } from '../types/types';
 import { useAppSelector } from '../store/hooks';
 
 const SearchInput: React.FC<SearchInputProps> = ({ onKeyDown }) => {

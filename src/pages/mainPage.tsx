@@ -1,19 +1,20 @@
 import Header from '../components/header';
 import SearchInput from '../components/searchInput';
-import React from 'react';
+import React, { useState } from 'react';
 import Cards from '../components/cards';
 import Loader from '../components/loader';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { saveValue } from '../store/features/searchReducer';
 import { useGetPostsQuery } from '../store/features/apiSlice';
+import { useAppDispatch } from '../store/hooks';
+import { saveValue } from '../store/features/searchReducer';
 
 const MainPage = () => {
-  const searchValue = useAppSelector((state) => state.search.value);
+  const [searchTerm, setSearchTerm] = useState('');
+  const { data: posts, isFetching } = useGetPostsQuery(searchTerm);
   const dispatch = useAppDispatch();
-  const { data: posts, isFetching } = useGetPostsQuery(searchValue);
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Enter') {
+      setSearchTerm(event.currentTarget.value);
       dispatch(saveValue(event.currentTarget.value));
     }
   }

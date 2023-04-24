@@ -1,20 +1,31 @@
-import { configureStore } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+export type TypeToolkitRaw = typeof toolkitRaw & { default?: unknown };
+const { combineReducers, configureStore } = ((toolkitRaw as TypeToolkitRaw).default ??
+  toolkitRaw) as typeof toolkitRaw;
 import { searchReducer } from './features/searchReducer';
 import { modalReducer } from './features/modalReducer';
 import { formReducer } from './features/formReducer';
-import { apiSlice } from './features/apiSlice';
+import { apiReducer, apiSlice } from './features/apiSlice';
 
-export const store = configureStore({
-  reducer: {
-    search: searchReducer,
-    modal: modalReducer,
-    form: formReducer,
-    [apiSlice.reducerPath]: apiSlice.reducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+const reducer = combineReducers({
+  search: searchReducer,
+  modal: modalReducer,
+  form: formReducer,
+  [apiSlice.reducerPath]: apiReducer,
 });
 
-export const initialState = store.getState();
+export function initializeStore(preloadedState?: object) {
+  return configureStore({
+    reducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+    preloadedState,
+  });
+}
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const initialState = initializeStore().getState();
+
+export type InitialState = toolkitRaw.PreloadedState<RootStateFromReducers>;
+export type AppStore = ReturnType<typeof initializeStore>;
+export type RootState = ReturnType<AppStore['getState']>;
+export type RootStateFromReducers = toolkitRaw.StateFromReducersMapObject<typeof reducer>;
+export type AppDispatch = AppStore['dispatch'];

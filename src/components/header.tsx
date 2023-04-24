@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
-import { HeaderProps } from '../types';
+import { HeaderProps } from '../types/types';
 
 const Header: React.FC<HeaderProps> = ({ page }) => {
   const navLinks = [

@@ -1,6 +1,6 @@
 import React from 'react';
 import favoriteImg from '../assets/favorite.svg';
-import { CardProps } from '../types';
+import { CardProps } from '../types/types';
 import closeImgSrc from '../assets/close.svg';
 
 const Card: React.FC<CardProps> = ({ post, clickHandler, isModal, closeHandler }) => {
