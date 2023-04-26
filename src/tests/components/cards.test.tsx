@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import Cards from '../../components/cards';
-import MockPosts from '../../dummy.json';
 import { renderWithProviders } from '../../utlis/test-utils';
 
 describe('Cards', () => {

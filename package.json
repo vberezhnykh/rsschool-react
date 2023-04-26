@@ -14,7 +14,9 @@
     "eslint": "eslint --fix . --ext .ts --ext .js --ext .tsx",
     "lint": "npm run eslint && npm run check-types",
     "test": "vitest && vitest run --coverage",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "cy:open": "cypress open --e2e -b chrome",
+    "cy:run": "cypress run && npx nyc report --reporter=text-summary"
   },
   "dependencies": {
     "@mswjs/interceptors": "^0.22.10",
@@ -38,10 +40,12 @@
     "vite-plugin-checker": "^0.5.6"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.4",
     "@testing-library/dom": "^9.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/cypress__code-coverage": "^3.10.0",
     "@types/lodash": "^4.14.191",
     "@types/node-fetch": "^2.6.3",
     "@types/react": "^18.0.27",
@@ -50,6 +54,8 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.29.2",
+    "@vitest/coverage-istanbul": "^0.30.1",
+    "cypress": "^12.10.0",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-config-standard-with-typescript": "^34.0.0",
@@ -64,6 +70,7 @@
     "typescript": "^4.9.5",
     "vite": "^4.1.0",
     "vite-plugin-eslint": "^1.8.1",
-    "vitest": "^0.29.2"
+    "vite-plugin-istanbul": "^4.0.1",
+    "vitest": "^0.30.1"
   }
 }
