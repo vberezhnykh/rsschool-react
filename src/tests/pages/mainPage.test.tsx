@@ -4,7 +4,6 @@ import Header from '../../components/header';
 import { BrowserRouter } from 'react-router-dom';
 import SearchInput from '../../components/searchInput';
 import { renderWithProviders } from '../../utlis/test-utils';
-import Cards from '../../components/cards';
 import MainPage from '../../pages/mainPage';
 import userEvent from '@testing-library/user-event';
 
