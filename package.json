@@ -13,10 +13,10 @@
     "check-types": "tsc --noEmit",
     "eslint": "eslint --fix . --ext .ts --ext .js --ext .tsx",
     "lint": "npm run eslint && npm run check-types",
-    "test": "vitest && vitest run --coverage",
-    "coverage": "vitest run --coverage",
+    "test:unit": "vitest && vitest run --coverage",
+    "coverage:unit": "vitest run --coverage",
     "cy:open": "cypress open --e2e -b chrome",
-    "cy:run": "cypress run && npx nyc report --reporter=text-summary"
+    "test:e2e": "cypress run && npx nyc report --reporter=text-summary"
   },
   "dependencies": {
     "@mswjs/interceptors": "^0.22.10",
