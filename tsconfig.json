@@ -17,8 +17,13 @@
     "jsx": "react-jsx",
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src",
+    "baseUrl": "./src"
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true,
+    "experimentalSpecifierResolution": "node"
+  }
 }

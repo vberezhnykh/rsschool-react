@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { FormInputs, NewFormProps } from '../types';
+import { FormInputs, NewFormProps } from '../types/types';
 
 const Form: React.FC<NewFormProps> = ({ submitHandler, formRef }) => {
   const {

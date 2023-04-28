@@ -3,7 +3,7 @@ import Form from '../components/form';
 import { SubmitHandler } from 'react-hook-form';
 import React from 'react';
 import FormCards from '../components/formCards';
-import { FormInputs } from '../types';
+import { FormInputs } from '../types/types';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { saveCard } from '../store/features/formReducer';
 import { v4 as uuidv4 } from 'uuid';
