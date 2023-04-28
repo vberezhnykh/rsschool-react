@@ -27,9 +27,15 @@ const Card: React.FC<CardProps> = ({ post, clickHandler, isModal, closeHandler }
     <li
       className={`cards__item ${isModal ? 'cards__item--opened' : undefined}`}
       onClick={handleClick}
+      data-testid={isModal ? 'modal' : undefined}
     >
       {isModal ? (
-        <img src={closeImgSrc} alt="" className="card__close-btn" onClick={closeHandler} />
+        <img
+          src={closeImgSrc}
+          alt="close-button"
+          className="card__close-btn"
+          onClick={closeHandler}
+        />
       ) : null}
       <h3 className="card__title">{post.title}</h3>
       <p className="card__body">{post.body}</p>

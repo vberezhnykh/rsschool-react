@@ -1,14 +1,11 @@
+/// <reference types="cypress" />
 describe('Form Page', () => {
-  it('loads successfully', () => {
+  beforeEach(() => {
     cy.visit('/form');
-
-    cy.get('header').contains('span', /Form Page/i);
   });
 
   it('creates card successfully', () => {
-    cy.visit('/form');
-    //const fakeFile = new File(['fakeFile'], 'fakeFile.png', { type: 'image/png' });
-
+    cy.get('header').contains('span', /Form Page/i);
     cy.get('input[name="name"]').type('John');
     cy.get('input[name="surname"]').type('Doe');
     cy.get('input[name="dateOfBirth"]').type('1999-12-31');
@@ -17,7 +14,16 @@ describe('Form Page', () => {
     cy.get('input[name="sex"]').check('Male');
     cy.get('input[type="checkbox"]').first().check();
     cy.get('input[type="submit"]').click();
-
     cy.contains('Nothing has been sumbitted yet.').should('not.exist');
+  });
+
+  it('shows error messages on invalid values', () => {
+    cy.get('input[type="submit"]').click();
+    cy.contains('Name is required');
+    cy.contains('Surname is required');
+    cy.contains('Date of Birth is required');
+    cy.contains('Photo is required');
+    cy.contains('Residence is required');
+    cy.contains('Sex is required');
   });
 });

@@ -49,6 +49,7 @@ const Cards = () => {
       <div
         className={`background-overlay ${isOpened ? 'background-overlay--visible' : undefined}`}
         onClick={overlayClickHandler}
+        data-testid="background-overlay"
       ></div>
       <Card isModal={true} post={isOpened ? post : null} closeHandler={cardCloseHandler} />
       <ul className="cards" data-testid="cards-list">
